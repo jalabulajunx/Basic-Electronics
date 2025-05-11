@@ -2,7 +2,7 @@
 
 An interactive web application to teach children the basics of electronics in a fun, visual way.
 
-![Electricity Explorer](assets/electricity_kid.svg)
+![Electricity Explorer](assets/electricity-explorer.svg)
 
 ## 🔌 Overview
 
