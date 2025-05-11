@@ -1,0 +1,649 @@
+body {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+    background: #f0f8ff;
+    color: #222;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #ffe066;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 4px solid #ffd700;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  nav {
+    margin-top: 1rem;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: bold;
+    background: #fffbe6;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  nav a:hover {
+    background: #ffd700;
+    color: #fff;
+  }
+  
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  section {
+    margin-bottom: 3rem;
+  }
+  
+  .intro {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  /* Power Demo Section */
+  .power-demo {
+    margin: 3rem 0;
+  }
+  
+  .circuit-demo {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .circuit-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 1rem;
+  }
+  
+  .battery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .battery-body {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .battery-terminal {
+    width: 20px;
+    height: 20px;
+    background: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .battery-cell {
+    width: 30px;
+    height: 40px;
+    background: #4a90e2;
+    border-radius: 4px;
+  }
+  
+  .voltage-label {
+    font-weight: bold;
+    color: #666;
+  }
+  
+  .wire {
+    height: 4px;
+    background: #666;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .wire::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    animation: currentFlow 2s linear infinite;
+  }
+  
+  @keyframes currentFlow {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  
+  .resistor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .resistor-body {
+    width: 80px;
+    height: 20px;
+    background: #f0f0f0;
+    border: 2px solid #666;
+    border-radius: 4px;
+    display: flex;
+    gap: 2px;
+  }
+  
+  .band {
+    flex: 1;
+  }
+  
+  .band.brown { background: #8B4513; }
+  .band.red { background: #FF0000; }
+  .band.orange { background: #FFA500; }
+  .band.yellow { background: #FFFF00; }
+  .band.green { background: #008000; }
+  .band.blue { background: #0000FF; }
+  .band.purple { background: #800080; }
+  .band.gray { background: #808080; }
+  .band.gold { background: #FFD700; }
+  
+  .lightbulb {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .bulb-body {
+    font-size: 3rem;
+    position: relative;
+    opacity: 0.5;
+    transition: opacity 0.3s, text-shadow 0.3s;
+  }
+  
+  .bulb-body.bright {
+    opacity: 1;
+    text-shadow: 0 0 20px #ffd700;
+  }
+  
+  .heat-waves {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .heat-waves.active {
+    opacity: 1;
+    animation: heatPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes heatPulse {
+    0% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
+    50% { transform: translateX(-50%) scale(1.2); opacity: 0.6; }
+    100% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
+  }
+  
+  .demo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .control-group label {
+    min-width: 120px;
+  }
+  
+  .control-group input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  .circuit-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Power Calculation Section */
+  .power-calculation {
+    margin: 3rem 0;
+  }
+  
+  .formula-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formula {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+    color: #0077cc;
+  }
+  
+  .interactive-formula {
+    margin-top: 1.5rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .formula-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .formula-input label {
+    min-width: 80px;
+  }
+  
+  .formula-input input {
+    width: 80px;
+    padding: 0.3rem;
+    border: 2px solid #ddd;
+    border-radius: 0.3rem;
+  }
+  
+  .formula-result {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 0.5rem;
+    background: #fffbe6;
+    border-radius: 0.3rem;
+    margin-top: 0.5rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    background: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  
+  button:hover {
+    background: #005fa3;
+  }
+  
+  /* Power Devices Section */
+  .power-devices {
+    margin: 3rem 0;
+  }
+  
+  .device-visualization {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+  }
+  
+  .power-scale {
+    position: relative;
+    height: 30px;
+    margin-bottom: 2rem;
+  }
+  
+  .scale-line {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ddd;
+  }
+  
+  .scale-marker {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  .scale-marker::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 2px;
+    height: 10px;
+    background: #666;
+    transform: translateX(-50%);
+  }
+  
+  .devices-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .device-item {
+    display: grid;
+    grid-template-columns: 60px 1fr 2fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    transition: transform 0.2s;
+  }
+  
+  .device-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .device-icon {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .device-info h4 {
+    margin: 0 0 0.2rem 0;
+  }
+  
+  .device-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .power-bar {
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .power-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #4a90e2, #0077cc);
+    border-radius: 10px;
+    transition: width 1s ease-out;
+  }
+  
+  /* Energy Consumption Section */
+  .energy-consumption {
+    margin: 3rem 0;
+  }
+  
+  .energy-calculator {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+  }
+  
+  .calculator-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .input-group label {
+    min-width: 130px;
+  }
+  
+  .input-group input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+  }
+  
+  .calculator-results {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .result-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .result-group span:last-child {
+    font-weight: bold;
+    color: #0077cc;
+  }
+  
+  .result-visualization {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .lightbulb-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lightbulb-container .bulb {
+    font-size: 1.5rem;
+  }
+  
+  /* Quiz Section */
+  .quiz-section {
+    margin: 3rem 0;
+  }
+  
+  .quiz-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quiz-question {
+    margin-bottom: 1.5rem;
+  }
+  
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .quiz-option {
+    padding: 1rem;
+    background: #5f93c8;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  
+  .quiz-option:hover {
+    background: #fffbe6;
+    border-color: #ffd700;
+  }
+  
+  .quiz-option.selected {
+    background: #fffbe6;
+    border-color: #ffd700;
+  }
+  
+  .quiz-option.correct {
+    background: #d4edda;
+    border-color: #28a745;
+  }
+  
+  .quiz-option.incorrect {
+    background: #f8d7da;
+    border-color: #dc3545;
+  }
+  
+  .quiz-feedback {
+    min-height: 50px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    display: none;
+  }
+  
+  .quiz-feedback.correct {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .quiz-feedback.incorrect {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .quiz-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  #next-question {
+    padding: 0.5rem 1rem;
+    background: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  #next-question:hover {
+    background: #005fa3;
+  }
+  
+  #next-question:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .quiz-progress {
+    flex-grow: 1;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 20%;
+    background: #ffd700;
+    transition: width 0.3s ease;
+  }
+  
+  /* Info Cards */
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .energy-calculator {
+      grid-template-columns: 1fr;
+    }
+    
+    .circuit-info {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .control-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .control-group input[type="range"] {
+      width: 100%;
+      max-width: none;
+    }
+  }

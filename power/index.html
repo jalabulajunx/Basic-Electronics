@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power - Electricity Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>⚡ Power</h1>
+    <nav>
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>What is Electric Power?</h2>
+      <p>Power is the rate at which energy is transferred or used. Just like how water flows through a pipe, electricity flows through wires - and power tells us how much work that electricity can do every second!</p>
+    </section>
+
+    <section class="power-demo">
+      <h2>See Power in Action!</h2>
+      <div class="circuit-demo">
+        <div class="circuit-diagram">
+          <div class="battery">
+            <div class="battery-body">
+              <div class="battery-terminal">+</div>
+              <div class="battery-cell"></div>
+              <div class="battery-cell"></div>
+              <div class="battery-terminal">-</div>
+            </div>
+            <div class="voltage-label">9V</div>
+          </div>
+          <div class="wire"></div>
+          <div class="resistor">
+            <div class="resistor-body">
+              <!-- Bands will be added by JavaScript -->
+            </div>
+          </div>
+          <div class="wire"></div>
+          <div class="lightbulb">
+            <div class="bulb-body">💡</div>
+            <div class="heat-waves"></div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <div class="control-group">
+            <label for="voltage">Voltage (V):</label>
+            <input type="range" id="voltage" min="1.5" max="12" value="9" step="1.5">
+            <span class="value-display">9 V</span>
+          </div>
+          <div class="control-group">
+            <label for="resistance">Resistance (Ω):</label>
+            <input type="range" id="resistance" min="10" max="1000" value="100">
+            <span class="value-display">100 Ω</span>
+          </div>
+          <div class="circuit-info">
+            <p>Current: <span id="current">0.09 A</span></p>
+            <p>Power: <span id="power">0.81 W</span></p>
+            <p>Bulb Brightness: <span id="brightness">Medium</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="power-calculation">
+      <h2>How Do We Calculate Power?</h2>
+      <div class="formula-cards">
+        <div class="card">
+          <h3>Power Formula #1</h3>
+          <div class="formula">P = V × I</div>
+          <p>Power (watts) = Voltage (volts) × Current (amps)</p>
+          <div class="interactive-formula">
+            <div class="formula-input">
+              <label>Voltage:</label>
+              <input type="number" id="formula1-voltage" value="9" min="0" max="100">
+              <span>V</span>
+            </div>
+            <div class="formula-input">
+              <label>Current:</label>
+              <input type="number" id="formula1-current" value="2" min="0" max="100" step="0.1">
+              <span>A</span>
+            </div>
+            <div class="formula-result">
+              <span>Power:</span>
+              <span id="formula1-result">18 W</span>
+            </div>
+            <button id="formula1-calculate">Calculate</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>Power Formula #2</h3>
+          <div class="formula">P = I² × R</div>
+          <p>Power (watts) = Current² (amps) × Resistance (ohms)</p>
+          <div class="interactive-formula">
+            <div class="formula-input">
+              <label>Current:</label>
+              <input type="number" id="formula2-current" value="2" min="0" max="100" step="0.1">
+              <span>A</span>
+            </div>
+            <div class="formula-input">
+              <label>Resistance:</label>
+              <input type="number" id="formula2-resistance" value="4" min="0" max="1000">
+              <span>Ω</span>
+            </div>
+            <div class="formula-result">
+              <span>Power:</span>
+              <span id="formula2-result">16 W</span>
+            </div>
+            <button id="formula2-calculate">Calculate</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>Power Formula #3</h3>
+          <div class="formula">P = V² ÷ R</div>
+          <p>Power (watts) = Voltage² (volts) ÷ Resistance (ohms)</p>
+          <div class="interactive-formula">
+            <div class="formula-input">
+              <label>Voltage:</label>
+              <input type="number" id="formula3-voltage" value="12" min="0" max="100">
+              <span>V</span>
+            </div>
+            <div class="formula-input">
+              <label>Resistance:</label>
+              <input type="number" id="formula3-resistance" value="8" min="0" max="1000">
+              <span>Ω</span>
+            </div>
+            <div class="formula-result">
+              <span>Power:</span>
+              <span id="formula3-result">18 W</span>
+            </div>
+            <button id="formula3-calculate">Calculate</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="power-devices">
+      <h2>Power Ratings of Everyday Devices</h2>
+      <p>Different devices need different amounts of power to work. Let's compare!</p>
+      
+      <div class="device-visualization">
+        <div class="power-scale">
+          <div class="scale-line"></div>
+          <div class="scale-marker" style="left: 0%">0W</div>
+          <div class="scale-marker" style="left: 25%">250W</div>
+          <div class="scale-marker" style="left: 50%">500W</div>
+          <div class="scale-marker" style="left: 75%">750W</div>
+          <div class="scale-marker" style="left: 100%">1000W+</div>
+        </div>
+        
+        <div class="devices-container">
+          <div class="device-item" data-power="5">
+            <div class="device-icon">📱</div>
+            <div class="device-info">
+              <h4>Smartphone</h4>
+              <p>5 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="60">
+            <div class="device-icon">💻</div>
+            <div class="device-info">
+              <h4>Laptop</h4>
+              <p>60 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="10">
+            <div class="device-icon">💡</div>
+            <div class="device-info">
+              <h4>LED Lightbulb</h4>
+              <p>10 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="60">
+            <div class="device-icon">💡</div>
+            <div class="device-info">
+              <h4>Incandescent Bulb</h4>
+              <p>60 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="800">
+            <div class="device-icon">🔥</div>
+            <div class="device-info">
+              <h4>Toaster</h4>
+              <p>800 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="1200">
+            <div class="device-icon">🌪️</div>
+            <div class="device-info">
+              <h4>Hair Dryer</h4>
+              <p>1200 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="1500">
+            <div class="device-icon">🔥</div>
+            <div class="device-info">
+              <h4>Space Heater</h4>
+              <p>1500 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+          
+          <div class="device-item" data-power="3000">
+            <div class="device-icon">🍳</div>
+            <div class="device-info">
+              <h4>Electric Stove</h4>
+              <p>3000 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+
+          <div class="device-item" data-power="250">
+            <div class="device-icon">📺</div>
+            <div class="device-info">
+              <h4>TV</h4>
+              <p>250 watts</p>
+            </div>
+            <div class="power-bar"><div class="power-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="energy-consumption">
+      <h2>Power and Energy Consumption</h2>
+      <p>Power (watts) is the rate of energy use at a given moment. Energy (watt-hours) is the total amount of power used over time.</p>
+      
+      <div class="energy-calculator">
+        <h3>Energy Usage Calculator</h3>
+        <div class="calculator-inputs">
+          <div class="input-group">
+            <label for="device-power">Device Power:</label>
+            <input type="number" id="device-power" min="1" max="3000" value="100">
+            <span>watts</span>
+          </div>
+          <div class="input-group">
+            <label for="usage-hours">Hours Used Per Day:</label>
+            <input type="number" id="usage-hours" min="0.1" max="24" value="5" step="0.1">
+            <span>hours</span>
+          </div>
+          <div class="input-group">
+            <label for="electricity-cost">Electricity Cost:</label>
+            <input type="number" id="electricity-cost" min="0.01" max="1" value="0.15" step="0.01">
+            <span>$ per kWh</span>
+          </div>
+          <button id="calculate-energy">Calculate</button>
+        </div>
+        
+        <div class="calculator-results">
+          <div class="result-group">
+            <span>Daily Energy:</span>
+            <span id="daily-energy">0.5 kWh</span>
+          </div>
+          <div class="result-group">
+            <span>Monthly Energy:</span>
+            <span id="monthly-energy">15 kWh</span>
+          </div>
+          <div class="result-group">
+            <span>Monthly Cost:</span>
+            <span id="monthly-cost">$2.25</span>
+          </div>
+          <div class="result-visualization">
+            <div class="lightbulb-container">
+              <!-- Lightbulbs will be added by JavaScript -->
+            </div>
+            <p>This is equivalent to running <span id="equivalent-bulbs">50</span> LED bulbs for 1 hour!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>Test Your Knowledge</h2>
+      <div class="quiz-container">
+        <div id="quiz-question" class="quiz-question">
+          <h3>Question: <span id="question-number">1</span>/<span id="question-total">5</span></h3>
+          <p id="question-text">What is the formula for calculating electric power using voltage and current?</p>
+        </div>
+        <div id="quiz-options" class="quiz-options">
+          <button class="quiz-option" data-index="0">P = V × I</button>
+          <button class="quiz-option" data-index="1">P = V + I</button>
+          <button class="quiz-option" data-index="2">P = V - I</button>
+          <button class="quiz-option" data-index="3">P = V ÷ I</button>
+        </div>
+        <div id="quiz-feedback" class="quiz-feedback"></div>
+        <div id="quiz-controls" class="quiz-controls">
+          <button id="next-question" disabled>Next Question</button>
+          <div id="quiz-progress" class="quiz-progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div id="quiz-score">Score: <span id="score">0</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning">
+      <h2>Learn More</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3>Power vs. Energy</h3>
+          <p>Power is the rate of using energy. If energy is like water in a bucket, power is how fast you pour the water.</p>
+        </div>
+        <div class="card">
+          <h3>The Watt</h3>
+          <p>The watt (W) is named after James Watt, the inventor who improved the steam engine in the 1700s!</p>
+        </div>
+        <div class="card">
+          <h3>Fun Fact</h3>
+          <p>Did you know? A typical lightning bolt has about 1 billion watts of power - enough to light up 100 million LED bulbs!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
