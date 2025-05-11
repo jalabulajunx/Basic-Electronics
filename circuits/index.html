@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuits - Electricity Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>⚡ Circuits</h1>
+    <nav>
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>Understanding Circuit Diagrams</h2>
+      <p>Circuit diagrams help us understand how electricity flows through components. They're like maps that show how electricity travels! In this chapter, we'll learn how to read and create circuit diagrams and see how components work together.</p>
+    </section>
+
+    <section class="symbols">
+      <h2>Circuit Symbols</h2>
+      <div class="symbol-cards">
+        <!-- Power sources -->
+        <div class="card">
+          <h3>Power Sources</h3>
+          <div class="symbol-grid">
+            <div class="symbol-item">
+              <div class="symbol battery"></div>
+              <span>Battery</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol cell"></div>
+              <span>Cell</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol ac-source"></div>
+              <span>AC Source</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic components -->
+        <div class="card">
+          <h3>Basic Components</h3>
+          <div class="symbol-grid">
+            <div class="symbol-item">
+              <div class="symbol resistor"></div>
+              <span>Resistor</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol capacitor"></div>
+              <span>Capacitor</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol inductor"></div>
+              <span>Inductor</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Switches and controls -->
+        <div class="card">
+          <h3>Switches & Controls</h3>
+          <div class="symbol-grid">
+            <div class="symbol-item">
+              <div class="symbol switch"></div>
+              <span>Switch</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol push-button"></div>
+              <span>Push Button</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol potentiometer"></div>
+              <span>Potentiometer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outputs -->
+        <div class="card">
+          <h3>Output Devices</h3>
+          <div class="symbol-grid">
+            <div class="symbol-item">
+              <div class="symbol lamp"></div>
+              <span>Lamp</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol led"></div>
+              <span>LED</span>
+            </div>
+            <div class="symbol-item">
+              <div class="symbol buzzer"></div>
+              <span>Buzzer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reading-diagrams">
+      <h2>Reading Circuit Diagrams</h2>
+      <div class="diagram-example">
+        <div class="example-circuit">
+          <div class="circuit-title">Simple LED Circuit</div>
+          <div class="schematic-diagram" id="example-circuit"></div>
+        </div>
+        <div class="diagram-explanation">
+          <h3>Key Rules:</h3>
+          <ul>
+            <li>Current flows from + to - (conventional current)</li>
+            <li>Lines represent conductors (wires)</li>
+            <li>Components are connected where lines meet</li>
+            <li>A circuit must be complete (closed loop) for current to flow</li>
+            <li>Ground symbols represent a reference point (usually 0V)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-circuits">
+      <h2>Interactive Circuits</h2>
+      <div class="circuit-tabs">
+        <button class="circuit-tab active" data-circuit="series">Series Circuit</button>
+        <button class="circuit-tab" data-circuit="parallel">Parallel Circuit</button>
+        <button class="circuit-tab" data-circuit="mixed">Mixed Circuit</button>
+      </div>
+      
+      <div class="circuit-container">
+        <!-- Series circuit -->
+        <div class="circuit series-circuit active">
+          <div class="circuit-diagram" id="series-circuit-diagram"></div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label for="series-voltage">Battery Voltage:</label>
+              <input type="range" id="series-voltage" min="1.5" max="12" value="9" step="1.5">
+              <span id="series-voltage-value">9V</span>
+            </div>
+            <div class="component-controls">
+              <div class="component-control">
+                <label>Resistor 1:</label>
+                <input type="range" class="component-value" data-component="resistor1" data-circuit="series" min="100" max="1000" value="200" step="100">
+                <span class="component-value-display">200Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Resistor 2:</label>
+                <input type="range" class="component-value" data-component="resistor2" data-circuit="series" min="100" max="1000" value="300" step="100">
+                <span class="component-value-display">300Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Capacitor:</label>
+                <input type="range" class="component-value" data-component="capacitor" data-circuit="series" min="1" max="100" value="10" step="1">
+                <span class="component-value-display">10µF</span>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-metrics">
+            <div class="metric">
+              <span>Total Resistance:</span>
+              <span id="series-total-resistance">500Ω</span>
+            </div>
+            <div class="metric">
+              <span>Current:</span>
+              <span id="series-current">0.018A</span>
+            </div>
+            <div class="metric">
+              <span>LED Brightness:</span>
+              <div class="brightness-meter">
+                <div class="brightness-level" id="series-brightness"></div>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-explanation">
+            <h3>Series Circuit Rules:</h3>
+            <ul>
+              <li>Current (I) is the same through all components</li>
+              <li>Voltage (V) is divided across components based on their resistance</li>
+              <li>Total resistance: R<sub>total</sub> = R<sub>1</sub> + R<sub>2</sub> + ...</li>
+              <li>Total capacitance: 1/C<sub>total</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + ...</li>
+              <li>Total inductance: L<sub>total</sub> = L<sub>1</sub> + L<sub>2</sub> + ...</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Parallel circuit -->
+        <div class="circuit parallel-circuit">
+          <div class="circuit-diagram" id="parallel-circuit-diagram"></div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label for="parallel-voltage">Battery Voltage:</label>
+              <input type="range" id="parallel-voltage" min="1.5" max="12" value="9" step="1.5">
+              <span id="parallel-voltage-value">9V</span>
+            </div>
+            <div class="component-controls">
+              <div class="component-control">
+                <label>Resistor 1:</label>
+                <input type="range" class="component-value" data-component="resistor1" data-circuit="parallel" min="100" max="1000" value="200" step="100">
+                <span class="component-value-display">200Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Resistor 2:</label>
+                <input type="range" class="component-value" data-component="resistor2" data-circuit="parallel" min="100" max="1000" value="300" step="100">
+                <span class="component-value-display">300Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Capacitor:</label>
+                <input type="range" class="component-value" data-component="capacitor" data-circuit="parallel" min="1" max="100" value="10" step="1">
+                <span class="component-value-display">10µF</span>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-metrics">
+            <div class="metric">
+              <span>Total Resistance:</span>
+              <span id="parallel-total-resistance">120Ω</span>
+            </div>
+            <div class="metric">
+              <span>Current:</span>
+              <span id="parallel-current">0.075A</span>
+            </div>
+            <div class="metric">
+              <span>LED Brightness:</span>
+              <div class="brightness-meter">
+                <div class="brightness-level" id="parallel-brightness"></div>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-explanation">
+            <h3>Parallel Circuit Rules:</h3>
+            <ul>
+              <li>Voltage (V) is the same across all components</li>
+              <li>Current (I) is divided among components based on their resistance</li>
+              <li>Total resistance: 1/R<sub>total</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + ...</li>
+              <li>Total capacitance: C<sub>total</sub> = C<sub>1</sub> + C<sub>2</sub> + ...</li>
+              <li>Total inductance: 1/L<sub>total</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + ...</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mixed circuit -->
+        <div class="circuit mixed-circuit">
+          <div class="circuit-diagram" id="mixed-circuit-diagram"></div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label for="mixed-voltage">Battery Voltage:</label>
+              <input type="range" id="mixed-voltage" min="1.5" max="12" value="9" step="1.5">
+              <span id="mixed-voltage-value">9V</span>
+            </div>
+            <div class="component-controls">
+              <div class="component-control">
+                <label>Resistor 1:</label>
+                <input type="range" class="component-value" data-component="resistor1" data-circuit="mixed" min="100" max="1000" value="200" step="100">
+                <span class="component-value-display">200Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Resistor 2:</label>
+                <input type="range" class="component-value" data-component="resistor2" data-circuit="mixed" min="100" max="1000" value="300" step="100">
+                <span class="component-value-display">300Ω</span>
+              </div>
+              <div class="component-control">
+                <label>Resistor 3:</label>
+                <input type="range" class="component-value" data-component="resistor3" data-circuit="mixed" min="100" max="1000" value="400" step="100">
+                <span class="component-value-display">400Ω</span>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-metrics">
+            <div class="metric">
+              <span>Total Resistance:</span>
+              <span id="mixed-total-resistance">371Ω</span>
+            </div>
+            <div class="metric">
+              <span>Current:</span>
+              <span id="mixed-current">0.024A</span>
+            </div>
+            <div class="metric">
+              <span>LED Brightness:</span>
+              <div class="brightness-meter">
+                <div class="brightness-level" id="mixed-brightness"></div>
+              </div>
+            </div>
+          </div>
+          <div class="circuit-explanation">
+            <h3>Mixed Circuit Analysis:</h3>
+            <ul>
+              <li>Break the circuit into series and parallel sections</li>
+              <li>Calculate the equivalent resistance for each section</li>
+              <li>Combine the equivalent resistances based on their arrangement</li>
+              <li>A more complex circuit means more paths for current!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>Test Your Knowledge</h2>
+      <div class="quiz-container">
+        <div id="quiz-question" class="quiz-question">
+          <h3>Question: <span id="question-number">1</span>/<span id="question-total">5</span></h3>
+          <p id="question-text">In a series circuit, how does the current compare between components?</p>
+        </div>
+        <div id="quiz-options" class="quiz-options">
+          <button class="quiz-option" data-index="0">Current is the same through all components</button>
+          <button class="quiz-option" data-index="1">Current is divided among components</button>
+          <button class="quiz-option" data-index="2">Current depends on the component type</button>
+          <button class="quiz-option" data-index="3">Current is blocked by resistors</button>
+        </div>
+        <div id="quiz-feedback" class="quiz-feedback"></div>
+        <div id="quiz-controls" class="quiz-controls">
+          <button id="next-question" disabled>Next Question</button>
+          <div id="quiz-progress" class="quiz-progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div id="quiz-score">Score: <span id="score">0</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning">
+      <h2>Learn More</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3>Kirchhoff's Current Law</h3>
+          <p>The sum of currents entering a node equals the sum of currents leaving a node. This means that current doesn't disappear or pile up at junctions!</p>
+        </div>
+        <div class="card">
+          <h3>Kirchhoff's Voltage Law</h3>
+          <p>The sum of all voltage drops around any closed loop in a circuit equals zero. This helps us analyze complex circuits!</p>
+        </div>
+        <div class="card">
+          <h3>Fun Fact</h3>
+          <p>Did you know? The word "circuit" comes from the Latin word "circuitus" which means "going around"! That's because electricity needs a complete path to flow around.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>Created with ❤️ for learning electronics</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
