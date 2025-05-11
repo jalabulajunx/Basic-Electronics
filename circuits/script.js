@@ -1,280 +1,660 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all interactive elements
-    drawExampleCircuit();
-    drawCircuits();
-    initializeCircuitTabs();
-    initializeComponentControls();
-    initializeQuiz();
-    animateElectrons();
-  });
-  
-  // Circuit drawing functions
-  function drawExampleCircuit() {
-    const canvas = document.getElementById('example-circuit');
-    
-    // Add battery
-    const battery = createBattery(30, 150);
-    canvas.appendChild(battery);
-    
-    // Add switch
-    const switchEl = createSwitch(120, 150);
-    canvas.appendChild(switchEl);
-    
-    // Add resistor
-    const resistor = createResistor(210, 150);
-    canvas.appendChild(resistor);
-    
-    // Add LED
-    const led = createLED(300, 150);
-    canvas.appendChild(led);
-    
-    // Add wires
-    const wires = [
-      createWire(60, 150, 120, 150, 'horizontal'),
-      createWire(150, 150, 180, 150, 'horizontal'),
-      createWire(240, 150, 300, 150, 'horizontal'),
-      createWire(330, 150, 350, 150, 'horizontal'),
-      createWire(350, 150, 350, 80, 'vertical'),
-      createWire(350, 80, 30, 80, 'horizontal'),
-      createWire(30, 80, 30, 150, 'vertical')
-    ];
-    
-    wires.forEach(wire => canvas.appendChild(wire));
-  }
-  
-  function drawCircuits() {
-    drawSeriesCircuit();
-    drawParallelCircuit();
-    drawMixedCircuit();
-  }
-  
-  function drawSeriesCircuit() {
-    const canvas = document.getElementById('series-circuit-diagram');
-    
-    // Add battery
-    const battery = createBattery(30, 150);
-    canvas.appendChild(battery);
-    
-    // Add resistor 1
-    const resistor1 = createResistor(140, 150);
-    resistor1.setAttribute('data-component', 'resistor1');
-    canvas.appendChild(resistor1);
-    
-    // Add resistor 2
-    const resistor2 = createResistor(250, 150);
-    resistor2.setAttribute('data-component', 'resistor2');
-    canvas.appendChild(resistor2);
-    
-    // Add capacitor
-    const capacitor = createCapacitor(360, 150);
-    capacitor.setAttribute('data-component', 'capacitor');
-    canvas.appendChild(capacitor);
-    
-    // Add LED
-    const led = createLED(450, 150);
-    led.id = 'series-led';
-    canvas.appendChild(led);
-    
-    // Add wires
-    const wires = [
-      createWire(60, 150, 110, 150, 'horizontal'),
-      createWire(170, 150, 220, 150, 'horizontal'),
-      createWire(280, 150, 345, 150, 'horizontal'),
-      createWire(375, 150, 450, 150, 'horizontal'),
-      createWire(480, 150, 500, 150, 'horizontal'),
-      createWire(500, 150, 500, 80, 'vertical'),
-      createWire(500, 80, 30, 80, 'horizontal'),
-      createWire(30, 80, 30, 150, 'vertical')
-    ];
-    
-    wires.forEach(wire => canvas.appendChild(wire));
-  }
-  
-  function drawParallelCircuit() {
-    const canvas = document.getElementById('parallel-circuit-diagram');
-    
-    // Add battery
-    const battery = createBattery(30, 150);
-    canvas.appendChild(battery);
-    
-    // Add junction points
-    const junction1 = createJunction(150, 150);
-    canvas.appendChild(junction1);
-    
-    const junction2 = createJunction(350, 150);
-    canvas.appendChild(junction2);
-    
-    // Add resistor 1 (top branch)
-    const resistor1 = createResistor(250, 100);
-    resistor1.setAttribute('data-component', 'resistor1');
-    canvas.appendChild(resistor1);
-    
-    // Add resistor 2 (middle branch)
-    const resistor2 = createResistor(250, 150);
-    resistor2.setAttribute('data-component', 'resistor2');
-    canvas.appendChild(resistor2);
-    
-    // Add capacitor (bottom branch)
-    const capacitor = createCapacitor(250, 200);
-    capacitor.setAttribute('data-component', 'capacitor');
-    canvas.appendChild(capacitor);
-    
-    // Add LED
-    const led = createLED(450, 150);
-    led.id = 'parallel-led';
-    canvas.appendChild(led);
-    
-    // Add wires
-    const wires = [
-      createWire(60, 150, 150, 150, 'horizontal'),
-      createWire(150, 150, 150, 100, 'vertical'),
-      createWire(150, 150, 150, 200, 'vertical'),
-      createWire(150, 100, 220, 100, 'horizontal'),
-      createWire(150, 150, 220, 150, 'horizontal'),
-      createWire(150, 200, 235, 200, 'horizontal'),
-      createWire(280, 100, 350, 100, 'horizontal'),
-      createWire(280, 150, 350, 150, 'horizontal'),
-      createWire(265, 200, 350, 200, 'horizontal'),
-      createWire(350, 100, 350, 150, 'vertical'),
-      createWire(350, 150, 350, 200, 'vertical'),
-      createWire(350, 150, 450, 150, 'horizontal'),
-      createWire(480, 150, 500, 150, 'horizontal'),
-      createWire(500, 150, 500, 80, 'vertical'),
-      createWire(500, 80, 30, 80, 'horizontal'),
-      createWire(30, 80, 30, 150, 'vertical')
-    ];
-    
-    wires.forEach(wire => canvas.appendChild(wire));
-  }
-  
-  function drawMixedCircuit() {
-    const canvas = document.getElementById('mixed-circuit-diagram');
-    
-    // Add battery
-    const battery = createBattery(30, 150);
-    canvas.appendChild(battery);
-    
-    // Add resistor 1 (series)
-    const resistor1 = createResistor(120, 150);
-    resistor1.setAttribute('data-component', 'resistor1');
-    canvas.appendChild(resistor1);
-    
-    // Add junction points
-    const junction1 = createJunction(200, 150);
-    canvas.appendChild(junction1);
-    
-    const junction2 = createJunction(350, 150);
-    canvas.appendChild(junction2);
-    
-    // Add resistor 2 (top branch)
-    const resistor2 = createResistor(275, 100);
-    resistor2.setAttribute('data-component', 'resistor2');
-    canvas.appendChild(resistor2);
-    
-    // Add resistor 3 (bottom branch)
-    const resistor3 = createResistor(275, 200);
-    resistor3.setAttribute('data-component', 'resistor3');
-    canvas.appendChild(resistor3);
-    
-    // Add LED
-    const led = createLED(450, 150);
-    led.id = 'mixed-led';
-    canvas.appendChild(led);
-    
-    // Add wires
-    const wires = [
-      createWire(60, 150, 90, 150, 'horizontal'),
-      createWire(150, 150, 200, 150, 'horizontal'),
-      createWire(200, 150, 200, 100, 'vertical'),
-      createWire(200, 150, 200, 200, 'vertical'),
-      createWire(200, 100, 245, 100, 'horizontal'),
-      createWire(200, 200, 245, 200, 'horizontal'),
-      createWire(305, 100, 350, 100, 'horizontal'),
-      createWire(305, 200, 350, 200, 'horizontal'),
-      createWire(350, 100, 350, 150, 'vertical'),
-      createWire(350, 150, 350, 200, 'vertical'),
-      createWire(350, 150, 450, 150, 'horizontal'),
-      createWire(480, 150, 500, 150, 'horizontal'),
-      createWire(500, 150, 500, 80, 'vertical'),
-      createWire(500, 80, 30, 80, 'horizontal'),
-      createWire(30, 80, 30, 150, 'vertical')
-    ];
-    
-    wires.forEach(wire => canvas.appendChild(wire));
-  }
-  
-  // Component creation functions
-  function createWire(x1, y1, x2, y2, orientation) {
-    const wire = document.createElement('div');
-    wire.className = `wire ${orientation}`;
-    
-    if (orientation === 'horizontal') {
-      wire.style.left = `${x1}px`;
-      wire.style.top = `${y1 - 2}px`;
-      wire.style.width = `${x2 - x1}px`;
-    } else {
-      wire.style.left = `${x1 - 2}px`;
-      wire.style.top = `${y1}px`;
-      wire.style.height = `${y2 - y1}px`;
+// KiCAD-inspired Circuit Library
+class CircuitSchematic {
+    constructor(containerId) {
+      this.container = document.getElementById(containerId);
+      this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      this.svg.setAttribute("width", "100%");
+      this.svg.setAttribute("height", "100%");
+      this.svg.setAttribute("viewBox", "0 0 600 300");
+      this.container.appendChild(this.svg);
+      
+      this.components = [];
+      this.wires = [];
+      this.electrons = [];
+      this.animationFrameId = null;
+      this.voltageValue = 9;
+      this.resistor1Value = 200;
+      this.resistor2Value = 300;
+      this.resistor3Value = 400;
+      this.capacitorValue = 10;
     }
     
-    return wire;
+    // Add component to schematic
+    addComponent(component) {
+      this.components.push(component);
+      component.render(this.svg);
+      return component;
+    }
+    
+    // Add wire connection
+    addWire(x1, y1, x2, y2) {
+      const wire = {
+        x1, y1, x2, y2,
+        element: document.createElementNS("http://www.w3.org/2000/svg", "line")
+      };
+      
+      wire.element.setAttribute("x1", x1);
+      wire.element.setAttribute("y1", y1);
+      wire.element.setAttribute("x2", x2);
+      wire.element.setAttribute("y2", y2);
+      wire.element.setAttribute("stroke", "#666");
+      wire.element.setAttribute("stroke-width", "3");
+      
+      this.wires.push(wire);
+      this.svg.appendChild(wire.element);
+      return wire;
+    }
+    
+    // Add a junction point (for parallel circuits)
+    addJunction(x, y) {
+      const junction = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      junction.setAttribute("cx", x);
+      junction.setAttribute("cy", y);
+      junction.setAttribute("r", "4");
+      junction.setAttribute("fill", "#666");
+      
+      this.svg.appendChild(junction);
+      return junction;
+    }
+    
+    // Create electron animation
+    addElectron(wire, delay = 0, duration = 2000) {
+      const electron = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      electron.setAttribute("r", "4");
+      electron.setAttribute("fill", "#ffd700");
+      
+      // Set initial position
+      electron.setAttribute("cx", wire.x1);
+      electron.setAttribute("cy", wire.y1);
+      
+      this.electrons.push({
+        element: electron,
+        wire,
+        delay,
+        duration,
+        progress: 0,
+        startTime: performance.now() + delay
+      });
+      
+      this.svg.appendChild(electron);
+      return electron;
+    }
+    
+    // Animate electrons
+    animateElectrons(timestamp) {
+      for (const electron of this.electrons) {
+        if (timestamp < electron.startTime) continue;
+        
+        const elapsed = timestamp - electron.startTime;
+        electron.progress = (elapsed % electron.duration) / electron.duration;
+        
+        // Linear interpolation between wire endpoints
+        const x = electron.wire.x1 + (electron.wire.x2 - electron.wire.x1) * electron.progress;
+        const y = electron.wire.y1 + (electron.wire.y2 - electron.wire.y1) * electron.progress;
+        
+        electron.element.setAttribute("cx", x);
+        electron.element.setAttribute("cy", y);
+      }
+      
+      this.animationFrameId = requestAnimationFrame(this.animateElectrons.bind(this));
+    }
+    
+    // Calculate circuit values and update UI
+    updateCircuit(circuitType) {
+      let totalResistance = 0;
+      let current = 0;
+      
+      // Calculate based on circuit type
+      if (circuitType === 'series') {
+        totalResistance = this.resistor1Value + this.resistor2Value;
+      } else if (circuitType === 'parallel') {
+        totalResistance = (this.resistor1Value * this.resistor2Value) / (this.resistor1Value + this.resistor2Value);
+      } else if (circuitType === 'mixed') {
+        const parallelResistance = (this.resistor2Value * this.resistor3Value) / 
+                                   (this.resistor2Value + this.resistor3Value);
+        totalResistance = this.resistor1Value + parallelResistance;
+      }
+      
+      // Calculate current using Ohm's Law (I = V/R)
+      current = this.voltageValue / totalResistance;
+      
+      // Update display values in the UI
+      document.getElementById(`${circuitType}-total-resistance`).textContent = 
+        `${Math.round(totalResistance)}Ω`;
+      document.getElementById(`${circuitType}-current`).textContent = 
+        `${current.toFixed(3)}A`;
+      
+      // Calculate LED brightness (scale for visual effect)
+      const brightness = Math.min(100, current * 1000);
+      document.getElementById(`${circuitType}-brightness`).style.width = `${brightness}%`;
+      
+      // Find and update LED component
+      const led = this.components.find(c => c.type === 'led');
+      if (led) {
+        led.setBrightness(brightness / 100);
+      }
+      
+      // Update electron animation speed based on current
+      for (const electron of this.electrons) {
+        electron.duration = 2000 / (current * 5); // Faster flow with higher current
+        if (electron.duration < 200) electron.duration = 200; // Set minimum speed
+      }
+    }
+    
+    // Start the animation
+    start() {
+      if (!this.animationFrameId) {
+        this.animationFrameId = requestAnimationFrame(this.animateElectrons.bind(this));
+      }
+    }
+    
+    // Stop the animation
+    stop() {
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+        this.animationFrameId = null;
+      }
+    }
+    
+    // Clear the schematic
+    clear() {
+      this.stop();
+      while (this.svg.firstChild) {
+        this.svg.removeChild(this.svg.firstChild);
+      }
+      this.components = [];
+      this.wires = [];
+      this.electrons = [];
+    }
   }
   
-  function createBattery(x, y) {
-    const battery = document.createElement('div');
-    battery.className = 'component battery-symbol';
-    battery.style.left = `${x}px`;
-    battery.style.top = `${y - 15}px`;
-    return battery;
+  // Circuit component classes
+  class CircuitComponent {
+    constructor(x, y, value = '') {
+      this.x = x;
+      this.y = y;
+      this.value = value;
+      this.element = null;
+    }
+    
+    render(svg) {
+      // Implemented by subclasses
+    }
   }
   
-  function createResistor(x, y) {
-    const resistor = document.createElement('div');
-    resistor.className = 'component resistor-symbol';
-    resistor.style.left = `${x - 30}px`;
-    resistor.style.top = `${y - 10}px`;
-    return resistor;
+  class Battery extends CircuitComponent {
+    constructor(x, y, value = '9V') {
+      super(x, y, value);
+      this.type = 'battery';
+    }
+    
+    render(svg) {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("transform", `translate(${this.x},${this.y})`);
+      
+      // Battery symbol
+      const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line1.setAttribute("x1", "0");
+      line1.setAttribute("y1", "-30");
+      line1.setAttribute("x2", "0");
+      line1.setAttribute("y2", "30");
+      line1.setAttribute("stroke", "#666");
+      line1.setAttribute("stroke-width", "3");
+      
+      const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line2.setAttribute("x1", "10");
+      line2.setAttribute("y1", "-20");
+      line2.setAttribute("x2", "10");
+      line2.setAttribute("y2", "20");
+      line2.setAttribute("stroke", "#666");
+      line2.setAttribute("stroke-width", "6");
+      
+      // Value label
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", "25");
+      text.setAttribute("y", "0");
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("font-size", "12");
+      text.textContent = this.value;
+      
+      group.appendChild(line1);
+      group.appendChild(line2);
+      group.appendChild(text);
+      
+      svg.appendChild(group);
+      this.element = group;
+      return group;
+    }
   }
   
-  function createCapacitor(x, y) {
-    const capacitor = document.createElement('div');
-    capacitor.className = 'component capacitor-symbol';
-    capacitor.style.left = `${x - 10}px`;
-    capacitor.style.top = `${y - 20}px`;
-    return capacitor;
+  class Resistor extends CircuitComponent {
+    constructor(x, y, value = '100Ω') {
+      super(x, y, value);
+      this.type = 'resistor';
+    }
+    
+    render(svg) {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("transform", `translate(${this.x},${this.y})`);
+      
+      // Resistor rectangle
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", "-40");
+      rect.setAttribute("y", "-10");
+      rect.setAttribute("width", "80");
+      rect.setAttribute("height", "20");
+      rect.setAttribute("fill", "white");
+      rect.setAttribute("stroke", "#666");
+      rect.setAttribute("stroke-width", "2");
+      rect.setAttribute("rx", "4");
+      
+      // Value label
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", "0");
+      text.setAttribute("y", "0");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("font-size", "12");
+      text.textContent = this.value;
+      
+      group.appendChild(rect);
+      group.appendChild(text);
+      
+      svg.appendChild(group);
+      this.element = group;
+      return group;
+    }
+    
+    // Update the resistor value
+    setValue(value) {
+      this.value = value;
+      const text = this.element.querySelector("text");
+      text.textContent = `${value}Ω`;
+    }
   }
   
-  function createLED(x, y) {
-    const led = document.createElement('div');
-    led.className = 'component led-symbol';
-    led.style.left = `${x}px`;
-    led.style.top = `${y - 15}px`;
-    led.style.opacity = '0.3'; // Start dim
-    return led;
+  class Capacitor extends CircuitComponent {
+    constructor(x, y, value = '10µF') {
+      super(x, y, value);
+      this.type = 'capacitor';
+    }
+    
+    render(svg) {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("transform", `translate(${this.x},${this.y})`);
+      
+      // Capacitor plates
+      const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line1.setAttribute("x1", "-5");
+      line1.setAttribute("y1", "-20");
+      line1.setAttribute("x2", "-5");
+      line1.setAttribute("y2", "20");
+      line1.setAttribute("stroke", "#666");
+      line1.setAttribute("stroke-width", "3");
+      
+      const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line2.setAttribute("x1", "5");
+      line2.setAttribute("y1", "-20");
+      line2.setAttribute("x2", "5");
+      line2.setAttribute("y2", "20");
+      line2.setAttribute("stroke", "#666");
+      line2.setAttribute("stroke-width", "3");
+      
+      // Value label
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", "20");
+      text.setAttribute("y", "0");
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("font-size", "12");
+      text.textContent = this.value;
+      
+      group.appendChild(line1);
+      group.appendChild(line2);
+      group.appendChild(text);
+      
+      svg.appendChild(group);
+      this.element = group;
+      return group;
+    }
+    
+    // Update the capacitor value
+    setValue(value) {
+      this.value = value;
+      const text = this.element.querySelector("text");
+      text.textContent = `${value}µF`;
+    }
   }
   
-  function createJunction(x, y) {
-    const junction = document.createElement('div');
-    junction.className = 'component junction';
-    junction.style.width = '8px';
-    junction.style.height = '8px';
-    junction.style.borderRadius = '50%';
-    junction.style.background = '#666';
-    junction.style.left = `${x - 4}px`;
-    junction.style.top = `${y - 4}px`;
-    return junction;
+  class LED extends CircuitComponent {
+    constructor(x, y) {
+      super(x, y);
+      this.type = 'led';
+      this.brightness = 0.3; // Default dim
+    }
+    
+    render(svg) {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("transform", `translate(${this.x},${this.y})`);
+      
+      // LED glow effect (behind bulb)
+      const glow = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      glow.setAttribute("cx", "0");
+      glow.setAttribute("cy", "0");
+      glow.setAttribute("r", "25");
+      glow.setAttribute("fill", "#ffd700");
+      glow.setAttribute("opacity", "0");
+      glow.setAttribute("filter", "blur(8px)");
+      
+      // LED bulb
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", "0");
+      circle.setAttribute("cy", "0");
+      circle.setAttribute("r", "15");
+      circle.setAttribute("fill", "#fffbe6");
+      circle.setAttribute("stroke", "#666");
+      circle.setAttribute("stroke-width", "2");
+      circle.setAttribute("opacity", this.brightness);
+      
+      // LED symbol
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", "0");
+      text.setAttribute("y", "0");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("font-size", "16");
+      text.textContent = "💡";
+      
+      group.appendChild(glow);
+      group.appendChild(circle);
+      group.appendChild(text);
+      
+      svg.appendChild(group);
+      this.element = group;
+      return group;
+    }
+    
+    // Update the LED brightness with glow effect
+    setBrightness(value) {
+      this.brightness = 0.3 + (value * 0.7); // Minimum brightness of 0.3
+      const circle = this.element.querySelector("circle:nth-child(2)");
+      const glow = this.element.querySelector("circle:first-child");
+      
+      // Update bulb opacity
+      circle.setAttribute("opacity", this.brightness);
+      
+      // Update glow intensity based on brightness
+      // Only show glow when brightness is significant
+      const glowIntensity = value > 0.2 ? value * 0.8 : 0;
+      glow.setAttribute("opacity", glowIntensity);
+      glow.setAttribute("r", 15 + (value * 20)); // Glow radius increases with brightness
+    }
   }
   
-  function createSwitch(x, y) {
-    const switchEl = document.createElement('div');
-    switchEl.className = 'component switch-symbol';
-    switchEl.style.left = `${x - 30}px`;
-    switchEl.style.top = `${y - 10}px`;
-    return switchEl;
+  // Create circuit diagrams
+  function initializeCircuitDiagrams() {
+    createSeriesCircuit();
+    createParallelCircuit();
+    createMixedCircuit();
+    
+    // Set up event handlers for sliders
+    setupSliderEvents();
   }
   
-  // Tab switching
+  // Create series circuit
+  function createSeriesCircuit() {
+    const seriesSchematic = new CircuitSchematic("series-circuit-diagram");
+    window.seriesSchematic = seriesSchematic; // Store for global access
+    
+    // Add components
+    const battery = seriesSchematic.addComponent(new Battery(30, 150, "9V"));
+    const resistor1 = seriesSchematic.addComponent(new Resistor(140, 150, "200Ω"));
+    const resistor2 = seriesSchematic.addComponent(new Resistor(250, 150, "300Ω"));
+    const capacitor = seriesSchematic.addComponent(new Capacitor(360, 150, "10µF"));
+    const led = seriesSchematic.addComponent(new LED(450, 150));
+    
+    // Add wires
+    const wire1 = seriesSchematic.addWire(40, 150, 100, 150);
+    const wire2 = seriesSchematic.addWire(180, 150, 210, 150);
+    const wire3 = seriesSchematic.addWire(290, 150, 340, 150);
+    const wire4 = seriesSchematic.addWire(375, 150, 435, 150);
+    const wire5 = seriesSchematic.addWire(465, 150, 520, 150);
+    const wire6 = seriesSchematic.addWire(520, 150, 520, 80);
+    const wire7 = seriesSchematic.addWire(520, 80, 30, 80);
+    const wire8 = seriesSchematic.addWire(30, 80, 30, 120);
+    
+    // Add some electrons with different delays for natural flow
+    for (let i = 0; i < 8; i++) {
+      const wireIndex = i % 5; // Use first 5 wires for electrons
+      let wire;
+      
+      switch(wireIndex) {
+        case 0: wire = wire1; break;
+        case 1: wire = wire2; break;
+        case 2: wire = wire3; break;
+        case 3: wire = wire4; break;
+        case 4: wire = wire5; break;
+      }
+      
+      seriesSchematic.addElectron(wire, i * 250, 2000); // Stagger timing
+    }
+    
+    // Start animation
+    seriesSchematic.start();
+    
+    // Calculate and update circuit values
+    seriesSchematic.updateCircuit('series');
+  }
+  
+  // Create parallel circuit
+  function createParallelCircuit() {
+    const parallelSchematic = new CircuitSchematic("parallel-circuit-diagram");
+    window.parallelSchematic = parallelSchematic; // Store for global access
+    
+    // Add components
+    const battery = parallelSchematic.addComponent(new Battery(30, 150, "9V"));
+    const resistor1 = parallelSchematic.addComponent(new Resistor(250, 100, "200Ω"));
+    const resistor2 = parallelSchematic.addComponent(new Resistor(250, 200, "300Ω"));
+    const led = parallelSchematic.addComponent(new LED(450, 150));
+    
+    // Add junctions
+    parallelSchematic.addJunction(150, 150);
+    parallelSchematic.addJunction(350, 150);
+    
+    // Add wires
+    const wire1 = parallelSchematic.addWire(40, 150, 150, 150);
+    const wire2 = parallelSchematic.addWire(150, 150, 150, 100);
+    const wire3 = parallelSchematic.addWire(150, 150, 150, 200);
+    const wire4 = parallelSchematic.addWire(150, 100, 210, 100);
+    const wire5 = parallelSchematic.addWire(290, 100, 350, 100);
+    const wire6 = parallelSchematic.addWire(150, 200, 210, 200);
+    const wire7 = parallelSchematic.addWire(290, 200, 350, 200);
+    const wire8 = parallelSchematic.addWire(350, 100, 350, 150);
+    const wire9 = parallelSchematic.addWire(350, 150, 350, 200);
+    const wire10 = parallelSchematic.addWire(350, 150, 435, 150);
+    const wire11 = parallelSchematic.addWire(465, 150, 520, 150);
+    const wire12 = parallelSchematic.addWire(520, 150, 520, 80);
+    const wire13 = parallelSchematic.addWire(520, 80, 30, 80);
+    const wire14 = parallelSchematic.addWire(30, 80, 30, 120);
+    
+    // Add some electrons with different delays
+    for (let i = 0; i < 12; i++) {
+      // Distribute electrons across main path and branches
+      let wire;
+      if (i < 4) {
+        wire = wire1; // Main input
+      } else if (i < 6) {
+        wire = wire4; // Top branch
+      } else if (i < 8) {
+        wire = wire6; // Bottom branch
+      } else if (i < 10) {
+        wire = wire10; // Output to LED
+      } else {
+        wire = wire11; // Return path
+      }
+      
+      parallelSchematic.addElectron(wire, i * 200, 1800); // Stagger timing
+    }
+    
+    // Start animation
+    parallelSchematic.start();
+    
+    // Calculate and update circuit values
+    parallelSchematic.updateCircuit('parallel');
+  }
+  
+  // Create mixed circuit
+  function createMixedCircuit() {
+    const mixedSchematic = new CircuitSchematic("mixed-circuit-diagram");
+    window.mixedSchematic = mixedSchematic; // Store for global access
+    
+    // Add components
+    const battery = mixedSchematic.addComponent(new Battery(30, 150, "9V"));
+    const resistor1 = mixedSchematic.addComponent(new Resistor(120, 150, "200Ω"));
+    const resistor2 = mixedSchematic.addComponent(new Resistor(275, 100, "300Ω"));
+    const resistor3 = mixedSchematic.addComponent(new Resistor(275, 200, "400Ω"));
+    const led = mixedSchematic.addComponent(new LED(450, 150));
+    
+    // Add junctions
+    mixedSchematic.addJunction(200, 150);
+    mixedSchematic.addJunction(350, 150);
+    
+    // Add wires
+    const wire1 = mixedSchematic.addWire(40, 150, 80, 150);
+    const wire2 = mixedSchematic.addWire(160, 150, 200, 150);
+    const wire3 = mixedSchematic.addWire(200, 150, 200, 100);
+    const wire4 = mixedSchematic.addWire(200, 150, 200, 200);
+    const wire5 = mixedSchematic.addWire(200, 100, 235, 100);
+    const wire6 = mixedSchematic.addWire(315, 100, 350, 100);
+    const wire7 = mixedSchematic.addWire(200, 200, 235, 200);
+    const wire8 = mixedSchematic.addWire(315, 200, 350, 200);
+    const wire9 = mixedSchematic.addWire(350, 100, 350, 150);
+    const wire10 = mixedSchematic.addWire(350, 150, 350, 200);
+    const wire11 = mixedSchematic.addWire(350, 150, 435, 150);
+    const wire12 = mixedSchematic.addWire(465, 150, 520, 150);
+    const wire13 = mixedSchematic.addWire(520, 150, 520, 80);
+    const wire14 = mixedSchematic.addWire(520, 80, 30, 80);
+    const wire15 = mixedSchematic.addWire(30, 80, 30, 120);
+    
+    // Add some electrons with different delays
+    for (let i = 0; i < 15; i++) {
+      // Distribute electrons across main path and branches
+      let wire;
+      if (i < 4) {
+        wire = wire1; // Main input
+      } else if (i < 6) {
+        wire = wire2; // Series resistor output
+      } else if (i < 8) {
+        wire = wire5; // Top branch
+      } else if (i < 10) {
+        wire = wire7; // Bottom branch
+      } else if (i < 12) {
+        wire = wire11; // Output to LED
+      } else {
+        wire = wire12; // Return path
+      }
+      
+      mixedSchematic.addElectron(wire, i * 180, 1600); // Stagger timing
+    }
+    
+    // Start animation
+    mixedSchematic.start();
+    
+    // Calculate and update circuit values
+    mixedSchematic.updateCircuit('mixed');
+  }
+  
+  // Set up slider event handlers
+  function setupSliderEvents() {
+    // Series circuit sliders
+    document.getElementById('series-voltage').addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value);
+      document.getElementById('series-voltage-value').textContent = `${value}V`;
+      window.seriesSchematic.voltageValue = value;
+      window.seriesSchematic.updateCircuit('series');
+    });
+    
+    document.querySelector('[data-component="resistor1"][data-circuit="series"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.seriesSchematic.resistor1Value = value;
+      window.seriesSchematic.components.find(c => c.type === 'resistor').setValue(`${value}Ω`);
+      window.seriesSchematic.updateCircuit('series');
+    });
+    
+    document.querySelector('[data-component="resistor2"][data-circuit="series"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.seriesSchematic.resistor2Value = value;
+      window.seriesSchematic.components.filter(c => c.type === 'resistor')[1].setValue(`${value}Ω`);
+      window.seriesSchematic.updateCircuit('series');
+    });
+    
+    document.querySelector('[data-component="capacitor"][data-circuit="series"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}µF`;
+      window.seriesSchematic.capacitorValue = value;
+      window.seriesSchematic.components.find(c => c.type === 'capacitor').setValue(`${value}µF`);
+      window.seriesSchematic.updateCircuit('series');
+    });
+    
+    // Parallel circuit sliders
+    document.getElementById('parallel-voltage').addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value);
+      document.getElementById('parallel-voltage-value').textContent = `${value}V`;
+      window.parallelSchematic.voltageValue = value;
+      window.parallelSchematic.updateCircuit('parallel');
+    });
+    
+    document.querySelector('[data-component="resistor1"][data-circuit="parallel"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.parallelSchematic.resistor1Value = value;
+      window.parallelSchematic.components.find(c => c.type === 'resistor').setValue(`${value}Ω`);
+      window.parallelSchematic.updateCircuit('parallel');
+    });
+    
+    document.querySelector('[data-component="resistor2"][data-circuit="parallel"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.parallelSchematic.resistor2Value = value;
+      window.parallelSchematic.components.filter(c => c.type === 'resistor')[1].setValue(`${value}Ω`);
+      window.parallelSchematic.updateCircuit('parallel');
+    });
+    
+    // Mixed circuit sliders
+    document.getElementById('mixed-voltage').addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value);
+      document.getElementById('mixed-voltage-value').textContent = `${value}V`;
+      window.mixedSchematic.voltageValue = value;
+      window.mixedSchematic.updateCircuit('mixed');
+    });
+    
+    document.querySelector('[data-component="resistor1"][data-circuit="mixed"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.mixedSchematic.resistor1Value = value;
+      window.mixedSchematic.components.find(c => c.type === 'resistor').setValue(`${value}Ω`);
+      window.mixedSchematic.updateCircuit('mixed');
+    });
+    
+    document.querySelector('[data-component="resistor2"][data-circuit="mixed"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.mixedSchematic.resistor2Value = value;
+      window.mixedSchematic.components.filter(c => c.type === 'resistor')[1].setValue(`${value}Ω`);
+      window.mixedSchematic.updateCircuit('mixed');
+    });
+    
+    document.querySelector('[data-component="resistor3"][data-circuit="mixed"]').addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      e.target.nextElementSibling.textContent = `${value}Ω`;
+      window.mixedSchematic.resistor3Value = value;
+      window.mixedSchematic.components.filter(c => c.type === 'resistor')[2].setValue(`${value}Ω`);
+      window.mixedSchematic.updateCircuit('mixed');
+    });
+  }
+  
+  // Handle tab switching
   function initializeCircuitTabs() {
     const tabs = document.querySelectorAll('.circuit-tab');
     const circuits = document.querySelectorAll('.circuit');
@@ -293,398 +673,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Component controls
-  function initializeComponentControls() {
-    // Voltage sliders
-    const voltageSliders = {
-      'series': document.getElementById('series-voltage'),
-      'parallel': document.getElementById('parallel-voltage'),
-      'mixed': document.getElementById('mixed-voltage')
+  // Init everything when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeCircuitTabs();
+    initializeCircuitDiagrams();
+    createExampleCircuit();
+  });
+  
+  // Create the example circuit for the "Reading Circuit Diagrams" section
+  function createExampleCircuit() {
+    const schematic = new CircuitSchematic("example-circuit");
+    
+    // Add components
+    const battery = schematic.addComponent(new Battery(30, 150, "9V"));
+    const switch1 = schematic.addComponent(new CircuitComponent(120, 150));
+    switch1.render = (svg) => {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      group.setAttribute("transform", `translate(${switch1.x},${switch1.y})`);
+      
+      // Switch lines
+      const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line1.setAttribute("x1", "-20");
+      line1.setAttribute("y1", "0");
+      line1.setAttribute("x2", "0");
+      line1.setAttribute("y2", "0");
+      line1.setAttribute("stroke", "#666");
+      line1.setAttribute("stroke-width", "3");
+      
+      const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line2.setAttribute("x1", "0");
+      line2.setAttribute("y1", "0");
+      line2.setAttribute("x2", "20");
+      line2.setAttribute("y2", "-15");
+      line2.setAttribute("stroke", "#666");
+      line2.setAttribute("stroke-width", "3");
+      
+      const line3 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line3.setAttribute("x1", "20");
+      line3.setAttribute("y1", "0");
+      line3.setAttribute("x2", "40");
+      line3.setAttribute("y2", "0");
+      line3.setAttribute("stroke", "#666");
+      line3.setAttribute("stroke-width", "3");
+      
+      group.appendChild(line1);
+      group.appendChild(line2);
+      group.appendChild(line3);
+      
+      svg.appendChild(group);
+      return group;
     };
+    switch1.render(schematic.svg);
     
-    // Initialize all voltage sliders
-    for (const [circuit, slider] of Object.entries(voltageSliders)) {
-      slider.addEventListener('input', () => {
-        updateVoltageDisplay(circuit);
-        updateCircuitValues(circuit);
-      });
-    }
+    const resistor = schematic.addComponent(new Resistor(210, 150, "220Ω"));
+    const led = schematic.addComponent(new LED(300, 150));
     
-    // Component value sliders
-    const componentSliders = document.querySelectorAll('.component-value');
-    componentSliders.forEach(slider => {
-      slider.addEventListener('input', () => {
-        updateComponentValue(slider);
-        updateCircuitValues(slider.getAttribute('data-circuit'));
-      });
-    });
+    // Add wires
+    const wire1 = schematic.addWire(60, 150, 100, 150);
+    const wire2 = schematic.addWire(140, 150, 170, 150);
+    const wire3 = schematic.addWire(250, 150, 285, 150);
+    const wire4 = schematic.addWire(315, 150, 350, 150);
+    const wire5 = schematic.addWire(350, 150, 350, 80);
+    const wire6 = schematic.addWire(350, 80, 30, 80);
+    const wire7 = schematic.addWire(30, 80, 30, 120);
     
-    // Initialize starting values
-    updateVoltageDisplay('series');
-    updateVoltageDisplay('parallel');
-    updateVoltageDisplay('mixed');
-    updateCircuitValues('series');
-    updateCircuitValues('parallel');
-    updateCircuitValues('mixed');
-  }
-  
-  function updateVoltageDisplay(circuit) {
-    const slider = document.getElementById(`${circuit}-voltage`);
-    const display = document.getElementById(`${circuit}-voltage-value`);
-    display.textContent = `${slider.value}V`;
-  }
-  
-  function updateComponentValue(slider) {
-    const component = slider.getAttribute('data-component');
-    const value = slider.value;
-    const display = slider.nextElementSibling;
-    
-    if (component.includes('resistor')) {
-      display.textContent = `${value}Ω`;
-    } else if (component.includes('capacitor')) {
-      display.textContent = `${value}µF`;
-    } else if (component.includes('inductor')) {
-      display.textContent = `${value}mH`;
-    }
-  }
-  
-  function updateCircuitValues(circuit) {
-    switch(circuit) {
-      case 'series':
-        updateSeriesCircuit();
-        break;
-      case 'parallel':
-        updateParallelCircuit();
-        break;
-      case 'mixed':
-        updateMixedCircuit();
-        break;
-    }
-  }
-  
-  function updateSeriesCircuit() {
-    // Get values
-    const voltage = parseFloat(document.getElementById('series-voltage').value);
-    const r1 = parseInt(document.querySelector('[data-component="resistor1"][data-circuit="series"]').value);
-    const r2 = parseInt(document.querySelector('[data-component="resistor2"][data-circuit="series"]').value);
-    
-    // Calculate total resistance
-    const totalResistance = r1 + r2;
-    document.getElementById('series-total-resistance').textContent = `${totalResistance}Ω`;
-    
-    // Calculate current using Ohm's Law
-    const current = voltage / totalResistance;
-    document.getElementById('series-current').textContent = `${current.toFixed(3)}A`;
-    
-    // Update LED brightness
-    const brightness = Math.min(100, current * 2000);
-    document.getElementById('series-brightness').style.width = `${brightness}%`;
-    
-    // Update LED visual
-    const led = document.getElementById('series-led');
-    if (led) {
-      led.style.opacity = brightness / 100 * 0.7 + 0.3;
-    }
-  }
-  
-  function updateParallelCircuit() {
-    // Get values
-    const voltage = parseFloat(document.getElementById('parallel-voltage').value);
-    const r1 = parseInt(document.querySelector('[data-component="resistor1"][data-circuit="parallel"]').value);
-    const r2 = parseInt(document.querySelector('[data-component="resistor2"][data-circuit="parallel"]').value);
-    
-    // Calculate total resistance for parallel
-    const totalResistance = (r1 * r2) / (r1 + r2);
-    document.getElementById('parallel-total-resistance').textContent = `${totalResistance.toFixed(0)}Ω`;
-    
-    // Calculate current using Ohm's Law
-    const current = voltage / totalResistance;
-    document.getElementById('parallel-current').textContent = `${current.toFixed(3)}A`;
-    
-    // Update LED brightness
-    const brightness = Math.min(100, current * 500);
-    document.getElementById('parallel-brightness').style.width = `${brightness}%`;
-    
-    // Update LED visual
-    const led = document.getElementById('parallel-led');
-    if (led) {
-      led.style.opacity = brightness / 100 * 0.7 + 0.3;
-    }
-  }
-  
-  function updateMixedCircuit() {
-    // Get values
-    const voltage = parseFloat(document.getElementById('mixed-voltage').value);
-    const r1 = parseInt(document.querySelector('[data-component="resistor1"][data-circuit="mixed"]').value);
-    const r2 = parseInt(document.querySelector('[data-component="resistor2"][data-circuit="mixed"]').value);
-    const r3 = parseInt(document.querySelector('[data-component="resistor3"][data-circuit="mixed"]').value);
-    
-    // Calculate parallel section
-    const parallelResistance = (r2 * r3) / (r2 + r3);
-    
-    // Calculate total resistance (series with parallel)
-    const totalResistance = r1 + parallelResistance;
-    document.getElementById('mixed-total-resistance').textContent = `${totalResistance.toFixed(0)}Ω`;
-    
-    // Calculate current using Ohm's Law
-    const current = voltage / totalResistance;
-    document.getElementById('mixed-current').textContent = `${current.toFixed(3)}A`;
-    
-    // Update LED brightness
-    const brightness = Math.min(100, current * 1000);
-    document.getElementById('mixed-brightness').style.width = `${brightness}%`;
-    
-    // Update LED visual
-    const led = document.getElementById('mixed-led');
-    if (led) {
-      led.style.opacity = brightness / 100 * 0.7 + 0.3;
-    }
-  }
-  
-  // Electron animation
-  function animateElectrons() {
-    const circuits = document.querySelectorAll('.circuit-diagram');
-    
-    circuits.forEach(circuit => {
-      setInterval(() => {
-        const wires = circuit.querySelectorAll('.wire');
-        const shouldAnimate = circuit.parentElement.classList.contains('active');
-        
-        if (shouldAnimate) {
-          const randomWire = wires[Math.floor(Math.random() * wires.length)];
-          
-          if (randomWire) {
-            const electron = document.createElement('div');
-            electron.className = 'electron';
-            
-            // Position the electron
-            if (randomWire.classList.contains('horizontal')) {
-              electron.style.top = `${parseInt(randomWire.style.top) + 2}px`;
-              electron.style.left = `${parseInt(randomWire.style.left)}px`;
-              
-              // Animate from left to right
-              electron.animate([
-                { left: `${parseInt(randomWire.style.left)}px`, opacity: 0 },
-                { left: `${parseInt(randomWire.style.left) + 20}px`, opacity: 1 },
-                { left: `${parseInt(randomWire.style.left) + parseInt(randomWire.style.width) - 20}px`, opacity: 1 },
-                { left: `${parseInt(randomWire.style.left) + parseInt(randomWire.style.width)}px`, opacity: 0 }
-              ], {
-                duration: 1000 + Math.random() * 1000,
-                easing: 'linear'
-              });
-            } else {
-              electron.style.left = `${parseInt(randomWire.style.left) + 2}px`;
-              electron.style.top = `${parseInt(randomWire.style.top)}px`;
-              
-              // Animate from top to bottom
-              electron.animate([
-                { top: `${parseInt(randomWire.style.top)}px`, opacity: 0 },
-                { top: `${parseInt(randomWire.style.top) + 20}px`, opacity: 1 },
-                { top: `${parseInt(randomWire.style.top) + parseInt(randomWire.style.height) - 20}px`, opacity: 1 },
-                { top: `${parseInt(randomWire.style.top) + parseInt(randomWire.style.height)}px`, opacity: 0 }
-              ], {
-                duration: 1000 + Math.random() * 1000,
-                easing: 'linear'
-              });
-            }
-            
-            circuit.appendChild(electron);
-            
-            // Remove the electron after animation
-            setTimeout(() => {
-              electron.remove();
-            }, 2000);
-          }
-        }
-      }, 300);
-    });
-  }
-  
-  // Quiz
-  function initializeQuiz() {
-    const questions = [
-      {
-        text: "In a series circuit, how does the current compare between components?",
-        options: [
-          "Current is the same through all components",
-          "Current is divided among components",
-          "Current depends on the component type",
-          "Current is blocked by resistors"
-        ],
-        correctIndex: 0,
-        explanation: "In a series circuit, the current is the same throughout the entire circuit because there's only one path for the electrons to flow."
-      },
-      {
-        text: "In a parallel circuit, how does the voltage compare between branches?",
-        options: [
-          "Voltage is divided between branches",
-          "Voltage is the same across all branches",
-          "Voltage increases with each branch",
-          "Voltage depends on the component type"
-        ],
-        correctIndex: 1,
-        explanation: "In a parallel circuit, the voltage is the same across all branches because they're all connected directly to the power source."
-      },
-      {
-        text: "What happens to the total resistance when resistors are added in series?",
-        options: [
-          "Total resistance decreases",
-          "Total resistance stays the same",
-          "Total resistance increases",
-          "Total resistance becomes zero"
-        ],
-        correctIndex: 2,
-        explanation: "When resistors are added in series, their resistances add up, so the total resistance increases."
-      },
-      {
-        text: "What happens to the total resistance when resistors are added in parallel?",
-        options: [
-          "Total resistance increases",
-          "Total resistance stays the same",
-          "Total resistance decreases",
-          "Total resistance doubles"
-        ],
-        correctIndex: 2,
-        explanation: "When resistors are added in parallel, the total resistance decreases because there are more paths for current to flow."
-      },
-      {
-        text: "Which circuit will have the brightest LED with the same components?",
-        options: [
-          "Series circuit",
-          "Parallel circuit",
-          "Both will be equally bright",
-          "It depends on the battery voltage"
-        ],
-        correctIndex: 1,
-        explanation: "A parallel circuit will have a brighter LED because it allows more current to flow through the circuit due to lower total resistance."
-      }
-    ];
-    
-    let currentQuestion = 0;
-    let score = 0;
-    
-    const questionText = document.getElementById('question-text');
-    const questionNumber = document.getElementById('question-number');
-    const questionTotal = document.getElementById('question-total');
-    const optionsContainer = document.getElementById('quiz-options');
-    const feedbackContainer = document.getElementById('quiz-feedback');
-    const nextButton = document.getElementById('next-question');
-    const progressBar = document.getElementById('progress-bar');
-    const scoreDisplay = document.getElementById('score');
-    
-    // Set up initial values
-    questionTotal.textContent = questions.length;
-    loadQuestion(currentQuestion);
-    
-    // Add event listeners
-    nextButton.addEventListener('click', () => {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        loadQuestion(currentQuestion);
-        updateProgress();
-      } else {
-        // Quiz completed
-        showFinalResults();
-      }
-    });
-    
-    function loadQuestion(index) {
-      const question = questions[index];
+    // Add electrons with different delays
+    for (let i = 0; i < 6; i++) {
+      const wireIndex = i % 4;
+      let wire;
       
-      // Update question display
-      questionText.textContent = question.text;
-      questionNumber.textContent = index + 1;
-      
-      // Clear previous options and feedback
-      optionsContainer.innerHTML = '';
-      feedbackContainer.className = 'quiz-feedback';
-      feedbackContainer.textContent = '';
-      
-      // Add options
-      question.options.forEach((option, optIndex) => {
-        const optionButton = document.createElement('button');
-        optionButton.className = 'quiz-option';
-        optionButton.textContent = option;
-        optionButton.setAttribute('data-index', optIndex);
-        
-        optionButton.addEventListener('click', () => {
-          handleOptionClick(optIndex);
-        });
-        
-        optionsContainer.appendChild(optionButton);
-      });
-      
-      // Reset next button
-      nextButton.disabled = true;
-    }
-    
-    function handleOptionClick(selectedIndex) {
-      const question = questions[currentQuestion];
-      const optionButtons = document.querySelectorAll('.quiz-option');
-      
-      // Disable all options
-      optionButtons.forEach(button => {
-        button.disabled = true;
-      });
-      
-      // Add selected class
-      optionButtons[selectedIndex].classList.add('selected');
-      
-      // Check if correct
-      const isCorrect = selectedIndex === question.correctIndex;
-      
-      if (isCorrect) {
-        optionButtons[selectedIndex].classList.add('correct');
-        feedbackContainer.textContent = `Correct! ${question.explanation}`;
-        feedbackContainer.className = 'quiz-feedback correct';
-        score++;
-        scoreDisplay.textContent = score;
-      } else {
-        optionButtons[selectedIndex].classList.add('incorrect');
-        optionButtons[question.correctIndex].classList.add('correct');
-        feedbackContainer.textContent = `Incorrect. ${question.explanation}`;
-        feedbackContainer.className = 'quiz-feedback incorrect';
+      switch(wireIndex) {
+        case 0: wire = wire1; break;
+        case 1: wire = wire2; break;
+        case 2: wire = wire3; break;
+        case 3: wire = wire4; break;
       }
       
-      // Enable next button
-      nextButton.disabled = false;
+      schematic.addElectron(wire, i * 300, 2000);
     }
     
-    function updateProgress() {
-      const progress = ((currentQuestion + 1) / questions.length) * 100;
-      progressBar.style.width = `${progress}%`;
-    }
+    // Set LED brightness
+    led.setBrightness(0.7);
     
-    function showFinalResults() {
-      // Clear question display
-      questionText.textContent = 'Quiz Completed!';
-      optionsContainer.innerHTML = '';
-      
-      // Show final score
-      feedbackContainer.className = 'quiz-feedback correct';
-      feedbackContainer.innerHTML = `
-        <h3>Your Final Score: ${score}/${questions.length}</h3>
-        <p>${getScoreFeedback(score, questions.length)}</p>
-      `;
-      
-      // Disable next button
-      nextButton.disabled = true;
-    }
-    
-    function getScoreFeedback(score, total) {
-      const percentage = (score / total) * 100;
-      
-      if (percentage >= 90) {
-        return "Amazing! You're a circuits expert!";
-      } else if (percentage >= 70) {
-        return "Great job! You understand circuits well!";
-      } else if (percentage >= 50) {
-        return "Good effort! Keep learning about circuits!";
-      } else {
-        return "Keep practicing! Circuits take time to understand.";
-      }
-    }
-    
-    // Initialize progress
-    updateProgress();
+    // Start animation
+    schematic.start();
   }
