@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resistors - Electricity Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>🔌 Resistors</h1>
+    <nav>
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>What are Resistors?</h2>
+      <p>Resistors are components that limit the flow of electric current in a circuit. Think of them like narrow pipes that control how much water can flow through!</p>
+    </section>
+
+    <section class="fan-demo">
+      <h2>See Resistors in Action!</h2>
+      <div class="circuit-demo">
+        <div class="circuit-diagram">
+          <div class="battery">
+            <div class="battery-body">
+              <div class="battery-terminal">+</div>
+              <div class="battery-cell"></div>
+              <div class="battery-cell"></div>
+              <div class="battery-terminal">-</div>
+            </div>
+            <div class="voltage-label">9V</div>
+          </div>
+          <div class="wire"></div>
+          <div class="resistor">
+            <div class="resistor-body">
+              <!-- Bands will be added by JavaScript -->
+            </div>
+          </div>
+          <div class="wire"></div>
+          <div class="fan">
+            <div class="fan-blades"></div>
+            <div class="fan-hub"></div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <div class="control-group">
+            <label for="demo-resistance">Resistance:</label>
+            <input type="range" id="demo-resistance" min="0" max="1000" value="100">
+            <span class="value-display">100 Ω</span>
+          </div>
+          <div class="circuit-info">
+            <p>Current: <span id="demo-current">0.09 A</span></p>
+            <p>Fan Speed: <span id="fan-speed">High</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="color-code">
+      <h2>Resistor Color Code</h2>
+      <div class="color-code-explanation">
+        <div class="resistor-example">
+          <h3>Resistor Color Code</h3>
+          <div class="resistor">
+            <div class="resistor-body">
+              <div class="band brown"></div>
+              <div class="band black"></div>
+              <div class="band red"></div>
+              <div class="band gold"></div>
+            </div>
+            <div class="band-labels">
+              <span>1st Digit</span>
+              <span>2nd Digit</span>
+              <span>Multiplier</span>
+              <span>Tolerance</span>
+            </div>
+          </div>
+          <p class="resistor-calculation">10 × 100 = 1000 Ω ±5%</p>
+        </div>
+        <div class="color-table">
+          <h3>Color Code Reference</h3>
+          <table>
+            <tr>
+              <th>Color</th>
+              <th>Value</th>
+              <th>Multiplier</th>
+              <th>Tolerance</th>
+            </tr>
+            <tr><td class="color-cell black">Black</td><td>0</td><td>×1</td><td>-</td></tr>
+            <tr><td class="color-cell brown">Brown</td><td>1</td><td>×10</td><td>±1%</td></tr>
+            <tr><td class="color-cell red">Red</td><td>2</td><td>×100</td><td>±2%</td></tr>
+            <tr><td class="color-cell orange">Orange</td><td>3</td><td>×1000</td><td>-</td></tr>
+            <tr><td class="color-cell yellow">Yellow</td><td>4</td><td>×10000</td><td>-</td></tr>
+            <tr><td class="color-cell green">Green</td><td>5</td><td>×100000</td><td>±0.5%</td></tr>
+            <tr><td class="color-cell blue">Blue</td><td>6</td><td>×1000000</td><td>±0.25%</td></tr>
+            <tr><td class="color-cell purple">Purple</td><td>7</td><td>×10000000</td><td>±0.1%</td></tr>
+            <tr><td class="color-cell gray">Gray</td><td>8</td><td>×100000000</td><td>±0.05%</td></tr>
+            <tr><td class="color-cell white">White</td><td>9</td><td>×1000000000</td><td>-</td></tr>
+            <tr><td class="color-cell gold">Gold</td><td>-</td><td>×0.1</td><td>±5%</td></tr>
+            <tr><td class="color-cell silver">Silver</td><td>-</td><td>×0.01</td><td>±10%</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-container">
+      <div class="quiz-resistor">
+        <h3>Resistor Quiz</h3>
+        <div class="resistor">
+          <div class="resistor-body">
+            <!-- Bands will be added by JavaScript -->
+          </div>
+          <div class="band-labels">
+            <span>1st Digit</span>
+            <span>2nd Digit</span>
+            <span>Multiplier</span>
+            <span>Tolerance</span>
+          </div>
+        </div>
+      </div>
+      <div class="quiz-controls">
+        <div class="quiz-input">
+          <label for="resistance-guess">What is the resistance value in ohms?</label>
+          <input type="number" id="resistance-guess" placeholder="Enter resistance value">
+          <button id="check-answer">Check Answer</button>
+        </div>
+        <div id="quiz-feedback" class="quiz-feedback"></div>
+      </div>
+    </section>
+
+    <section class="circuit-types">
+      <h2>Series and Parallel Circuits</h2>
+      <div class="circuit-tabs">
+        <button class="circuit-tab active" data-circuit="series">Series Circuit</button>
+        <button class="circuit-tab" data-circuit="parallel">Parallel Circuit</button>
+      </div>
+      
+      <div class="circuit-container">
+        <div class="circuit series-circuit active">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="resistor-group">
+              <div class="resistor" data-value="100">
+                <div class="resistor-body"></div>
+                <div class="resistor-bands"></div>
+              </div>
+              <div class="wire"></div>
+              <div class="resistor" data-value="200">
+                <div class="resistor-body"></div>
+                <div class="resistor-bands"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>R1:</label>
+              <input type="range" class="resistor-value" data-resistor="1" min="0" max="1000" value="100">
+              <span class="value-display">100 Ω</span>
+            </div>
+            <div class="control-group">
+              <label>R2:</label>
+              <input type="range" class="resistor-value" data-resistor="2" min="0" max="1000" value="200">
+              <span class="value-display">200 Ω</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Resistance: <span class="total-resistance">300 Ω</span></p>
+            <p>Current: <span class="current-value">0.02 A</span></p>
+            <p>Bulb Brightness: <span class="brightness-value">Medium</span></p>
+          </div>
+        </div>
+
+        <div class="circuit parallel-circuit">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="parallel-branch">
+              <div class="resistor" data-value="100">
+                <div class="resistor-body"></div>
+                <div class="resistor-bands"></div>
+              </div>
+              <div class="wire"></div>
+              <div class="resistor" data-value="200">
+                <div class="resistor-body"></div>
+                <div class="resistor-bands"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>R1:</label>
+              <input type="range" class="resistor-value" data-resistor="1" min="0" max="1000" value="100">
+              <span class="value-display">100 Ω</span>
+            </div>
+            <div class="control-group">
+              <label>R2:</label>
+              <input type="range" class="resistor-value" data-resistor="2" min="0" max="1000" value="200">
+              <span class="value-display">200 Ω</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Resistance: <span class="total-resistance">66.67 Ω</span></p>
+            <p>Current: <span class="current-value">0.09 A</span></p>
+            <p>Bulb Brightness: <span class="brightness-value">High</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning">
+      <h2>Learn More</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3>Color Code</h3>
+          <p>Resistors use colored bands to show their value. Each color represents a number!</p>
+          <ul class="color-code">
+            <li><span class="color brown"></span> Brown = 1</li>
+            <li><span class="color red"></span> Red = 2</li>
+            <li><span class="color orange"></span> Orange = 3</li>
+            <li><span class="color yellow"></span> Yellow = 4</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Series vs Parallel</h3>
+          <p>In series circuits, resistors add up: R<sub>total</sub> = R<sub>1</sub> + R<sub>2</sub></p>
+          <p>In parallel circuits: 1/R<sub>total</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub></p>
+        </div>
+        <div class="card">
+          <h3>Fun Fact</h3>
+          <p>Did you know? The first resistors were made from carbon and were used in early telephones!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html> 

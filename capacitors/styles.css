@@ -1,0 +1,743 @@
+body {
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  background: #f0f8ff;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #ffe066;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 4px solid #ffd700;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+nav {
+  margin-top: 1rem;
+}
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+  background: #fffbe6;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+nav a:hover {
+  background: #ffd700;
+  color: #fff;
+}
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+section {
+  margin-bottom: 3rem;
+}
+.intro {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+/* Charging Demo Section */
+.charging-demo {
+  margin: 3rem 0;
+}
+.circuit-demo {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.circuit-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+.battery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.battery-body {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.battery-terminal {
+  width: 20px;
+  height: 20px;
+  background: #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+.battery-cell {
+  width: 30px;
+  height: 40px;
+  background: #4a90e2;
+  border-radius: 4px;
+}
+.voltage-label {
+  font-weight: bold;
+  color: #666;
+}
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.switch-body {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #666;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+.switch-lever {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 4px;
+  background: #666;
+  transform-origin: left center;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+.switch-body.off .switch-lever {
+  transform: rotate(-45deg);
+}
+.wire {
+  height: 4px;
+  background: #666;
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+.wire::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  animation: currentFlow 2s linear infinite;
+}
+@keyframes currentFlow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+.capacitor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.capacitor-plates {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.plate {
+  width: 40px;
+  height: 60px;
+  background: #666;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.plate::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: chargeFlow 2s linear infinite;
+}
+.plate.positive::after {
+  animation-direction: reverse;
+}
+.dielectric {
+  width: 8px;
+  height: 60px;
+  background: #4a90e2;
+  border-radius: 4px;
+}
+.charge-indicator {
+  width: 100%;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.charge-indicator::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--charge-level, 0%);
+  height: 100%;
+  background: #4a90e2;
+  transition: width 0.5s ease-out;
+}
+@keyframes chargeFlow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+.led {
+  font-size: 2rem;
+  transition: opacity 0.3s, text-shadow 0.3s;
+}
+.led.bright {
+  text-shadow: 0 0 20px #ffd700;
+}
+/* Capacitor Code Section */
+.capacitor-code {
+  margin: 3rem 0;
+}
+.code-explanation {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.capacitor-example {
+  text-align: center;
+}
+.capacitor-body {
+  display: inline-block;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+.value-marking {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+.voltage-marking {
+  font-size: 1rem;
+  color: #666;
+}
+.capacitor-calculation {
+  font-size: 1.1rem;
+  color: #666;
+}
+.code-table {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+th {
+  background: #f8f9fa;
+}
+/* Quiz Section */
+.quiz-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+.quiz-capacitor {
+  text-align: center;
+}
+.quiz-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.quiz-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.quiz-input input {
+  padding: 0.5rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+}
+.quiz-input button {
+  padding: 0.5rem 1rem;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quiz-input button:hover {
+  background: #005fa3;
+}
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.quiz-feedback.correct {
+  background: #d4edda;
+  color: #155724;
+}
+.quiz-feedback.incorrect {
+  background: #f8d7da;
+  color: #721c24;
+}
+/* Circuit Types */
+.circuit-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.circuit-tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #fffbe6;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+.circuit-tab.active {
+  background: #ffd700;
+  color: #fff;
+}
+.circuit-container {
+  position: relative;
+  min-height: 400px;
+}
+.circuit {
+  display: none;
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.circuit.active {
+  display: block;
+}
+.circuit-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+.parallel-branch {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+.parallel-branch::before,
+.parallel-branch::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: #666;
+}
+.parallel-branch::before {
+  top: -1rem;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.parallel-branch::after {
+  top: -1rem;
+  bottom: -1rem;
+  right: 50%;
+  transform: translateX(50%);
+}
+.circuit-controls {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.circuit-info {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+/* Learning Section */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Fluorescent Tube Light Section */
+.fluorescent-demo {
+  margin: 3rem 0;
+}
+.circuit-diagram.fluorescent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+  position: relative;
+}
+.power-supply {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ac-source {
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: relative;
+}
+.ac-source::after {
+  content: '~';
+  font-size: 2rem;
+  color: #666;
+}
+.choke {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.choke-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.coil {
+  width: 40px;
+  height: 8px;
+  background: #666;
+  border-radius: 4px;
+  position: relative;
+}
+.coil::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #666;
+  border-radius: 6px;
+  opacity: 0.3;
+}
+.starter {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.starter-body {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.starter-glow {
+  width: 20px;
+  height: 20px;
+  background: #ffd700;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tube {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.filament {
+  width: 20px;
+  height: 40px;
+  background: #666;
+  border-radius: 4px;
+  position: relative;
+}
+.filament::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gas-tube {
+  width: 200px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #666;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.gas-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #ffd700, #fff, #ffd700);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.component-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.control-button {
+  padding: 0.8rem 1.5rem;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+.control-button:hover {
+  background: #005fa3;
+}
+.explanation {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.explanation ol {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+.explanation li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+/* Animation classes */
+.tube.active .filament::before {
+  opacity: 1;
+}
+.tube.active .gas-glow {
+  opacity: 0.8;
+}
+.starter.active .starter-glow {
+  opacity: 1;
+}
+/* Wire connections */
+.circuit-diagram.fluorescent .wire {
+  position: absolute;
+  background: #666;
+  height: 4px;
+}
+.circuit-diagram.fluorescent .wire::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  animation: currentFlow 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.circuit-diagram.fluorescent.active .wire::after {
+  opacity: 1;
+}
+/* Unit Explanation Section */
+.unit-explanation {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.unit-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.unit-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.unit-card:hover {
+  transform: translateY(-5px);
+}
+.unit-card h4 {
+  color: #0077cc;
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+.unit-card p {
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+.unit-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.comparison-item .icon {
+  font-size: 1.5rem;
+}
+.comparison-item p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.unit-scale {
+  margin-top: 3rem;
+}
+.unit-scale h4 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #0077cc;
+}
+.scale-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+.scale-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.scale-bar {
+  height: 20px;
+  background: linear-gradient(90deg, #4a90e2, #0077cc);
+  border-radius: 10px;
+  min-width: 50px;
+  transition: width 0.5s ease-out;
+}
+.scale-item span {
+  min-width: 150px;
+  font-size: 0.9rem;
+  color: #666;
+}
+/* Add some fun animations */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+.unit-card:hover .icon {
+  animation: float 1s ease-in-out infinite;
+}
+/* Make the scale bars more interactive */
+.scale-item:hover .scale-bar {
+  filter: brightness(1.2);
+  transform: scaleX(1.02);
+  transition: all 0.3s ease;
+} 

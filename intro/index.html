@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Electricity - Electricity Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>⚡ Introduction to Electricity</h1>
+        <nav>
+            <a href="../index.html">← Back to Home</a>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>Understanding Electricity</h2>
+            <p>Electricity is the flow of tiny particles called electrons. Let's explore how they move and create electric current!</p>
+        </section>
+
+        <section class="electron-flow">
+            <h2>Electron Flow</h2>
+            <div class="simulator">
+                <div class="wire-container">
+                    <div class="wire">
+                        <div class="electron-container">
+                            <!-- Electrons will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="voltage">Voltage (V):</label>
+                        <input type="range" id="voltage" min="0" max="12" value="6" step="0.1">
+                        <span id="voltage-value">6 V</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="current">Current (A):</label>
+                        <input type="range" id="current" min="0" max="2" value="1" step="0.1">
+                        <span id="current-value">1 A</span>
+                    </div>
+                </div>
+            </div>
+            <div class="explanation">
+                <p>Watch how electrons flow through the wire! Higher voltage makes them move faster, while higher current means more electrons are flowing.</p>
+            </div>
+        </section>
+
+        <section class="circuit-basics">
+            <h2>Basic Circuit Concepts</h2>
+            <div class="concept-cards">
+                <div class="card">
+                    <h3>Voltage (V)</h3>
+                    <div class="voltage-animation">
+                        <div class="battery">🔋</div>
+                        <div class="voltage-arrow"></div>
+                    </div>
+                    <p>Voltage is like the "push" that makes electrons move. It's measured in Volts (V).</p>
+                </div>
+                <div class="card">
+                    <h3>Current (A)</h3>
+                    <div class="current-animation">
+                        <div class="wire-loop">
+                            <div class="current-flow"></div>
+                        </div>
+                    </div>
+                    <p>Current is the flow of electrons. It's measured in Amperes (A).</p>
+                </div>
+                <div class="card">
+                    <h3>Resistance (Ω)</h3>
+                    <div class="resistance-animation">
+                        <div class="pipe">
+                            <div class="water-flow"></div>
+                        </div>
+                    </div>
+                    <p>Resistance is like a narrow pipe that makes it harder for electrons to flow.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-circuit">
+            <h2>Try It Yourself!</h2>
+            <div class="circuit-simulator">
+                <div class="circuit-board">
+                    <div class="battery">🔋</div>
+                    <div class="wire"></div>
+                    <div class="bulb">💡</div>
+                    <div class="wire"></div>
+                    <div class="resistor">📏</div>
+                </div>
+                <div class="circuit-controls">
+                    <div class="control-group">
+                        <label for="circuit-voltage">Battery Voltage:</label>
+                        <input type="range" id="circuit-voltage" min="0" max="12" value="6" step="0.1">
+                        <span id="circuit-voltage-value">6 V</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="circuit-resistance">Resistance:</label>
+                        <input type="range" id="circuit-resistance" min="0" max="1000" value="100">
+                        <span id="circuit-resistance-value">100 Ω</span>
+                    </div>
+                </div>
+                <div class="circuit-metrics">
+                    <div class="metric">
+                        <span>Current:</span>
+                        <span id="circuit-current">0.06 A</span>
+                    </div>
+                    <div class="metric">
+                        <span>Bulb Brightness:</span>
+                        <div class="brightness-meter">
+                            <div class="brightness-level"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html> 

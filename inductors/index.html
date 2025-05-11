@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inductors - Electricity Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>⚡ Inductors</h1>
+    <nav>
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>What are Inductors?</h2>
+      <p>Inductors are components that store energy in a magnetic field! They're like springs for electricity - they resist changes in current and can create magnetic fields. Think of them as electrical inertia!</p>
+    </section>
+
+    <section class="magnetic-field-demo">
+      <h2>See Magnetic Fields in Action!</h2>
+      <div class="circuit-demo">
+        <div class="circuit-diagram">
+          <div class="battery">
+            <div class="battery-body">
+              <div class="battery-terminal">+</div>
+              <div class="battery-cell"></div>
+              <div class="battery-cell"></div>
+              <div class="battery-terminal">-</div>
+            </div>
+            <div class="voltage-label">9V</div>
+          </div>
+          <div class="wire"></div>
+          <div class="switch">
+            <div class="switch-body">
+              <div class="switch-lever"></div>
+            </div>
+          </div>
+          <div class="wire"></div>
+          <div class="inductor">
+            <div class="coil">
+              <div class="coil-turn"></div>
+              <div class="coil-turn"></div>
+              <div class="coil-turn"></div>
+              <div class="coil-turn"></div>
+              <div class="coil-turn"></div>
+            </div>
+            <div class="magnetic-field"></div>
+            <div class="component-label">Inductor</div>
+          </div>
+          <div class="wire"></div>
+          <div class="led">💡</div>
+        </div>
+        <div class="demo-controls">
+          <div class="control-group">
+            <label for="inductance">Inductance:</label>
+            <input type="range" id="inductance" min="1" max="1000" value="100">
+            <span class="value-display">100 mH</span>
+          </div>
+          <div class="circuit-info">
+            <p>Current: <span id="current">0A</span></p>
+            <p>Magnetic Field: <span id="field-strength">Off</span></p>
+            <p>LED Brightness: <span id="led-brightness">Off</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="inductor-code">
+      <h2>Inductor Value Code</h2>
+      <div class="code-explanation">
+        <div class="inductor-example">
+          <h3>Reading Inductor Values</h3>
+          <div class="inductor">
+            <div class="inductor-body">
+              <div class="value-marking">104</div>
+              <div class="tolerance-marking">±10%</div>
+            </div>
+          </div>
+          <p class="inductor-calculation">10 × 10⁴ = 100,000 nH = 0.1 mH</p>
+        </div>
+        <div class="code-table">
+          <h3>Common Inductor Markings</h3>
+          <table>
+            <tr>
+              <th>Marking</th>
+              <th>Value</th>
+              <th>Unit</th>
+            </tr>
+            <tr><td>101</td><td>100</td><td>nH</td></tr>
+            <tr><td>102</td><td>1,000</td><td>nH</td></tr>
+            <tr><td>103</td><td>10,000</td><td>nH</td></tr>
+            <tr><td>104</td><td>100,000</td><td>nH</td></tr>
+            <tr><td>105</td><td>1,000,000</td><td>nH</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="unit-explanation">
+        <h3>Understanding Inductor Units</h3>
+        <div class="unit-cards">
+          <div class="unit-card">
+            <h4>Henry (H)</h4>
+            <p>The basic unit of inductance. It's like measuring how strong a magnet can be!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">🧲</span>
+                <p>1 Henry = A really strong electromagnet</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Millihenry (mH)</h4>
+            <p>One thousandth of a Henry. Common in everyday electronics!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">🔌</span>
+                <p>1 mH = A small power adapter</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">💡</span>
+                <p>Used in LED drivers and power supplies</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Microhenry (µH)</h4>
+            <p>One millionth of a Henry. Used in smaller circuits!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">📱</span>
+                <p>1 µH = A phone charger</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">🎮</span>
+                <p>Found in game controllers</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Nanohenry (nH)</h4>
+            <p>One billionth of a Henry. The smallest common unit!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">💻</span>
+                <p>1 nH = A computer circuit</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">📶</span>
+                <p>Used in radio and wireless circuits</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="circuit-types">
+      <h2>Series and Parallel Inductors</h2>
+      <div class="circuit-tabs">
+        <button class="circuit-tab active" data-circuit="series">Series Circuit</button>
+        <button class="circuit-tab" data-circuit="parallel">Parallel Circuit</button>
+      </div>
+      
+      <div class="circuit-container">
+        <div class="circuit series-circuit active">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="inductor-group">
+              <div class="inductor" data-value="100">
+                <div class="coil">
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                </div>
+              </div>
+              <div class="wire"></div>
+              <div class="inductor" data-value="200">
+                <div class="coil">
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>L1:</label>
+              <input type="range" class="inductor-value" data-inductor="1" min="1" max="1000" value="100">
+              <span class="value-display">100 mH</span>
+            </div>
+            <div class="control-group">
+              <label>L2:</label>
+              <input type="range" class="inductor-value" data-inductor="2" min="1" max="1000" value="200">
+              <span class="value-display">200 mH</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Inductance: <span class="total-inductance">300 mH</span></p>
+            <p>Current Rise Time: <span class="rise-time">0.3s</span></p>
+            <p>LED Brightness: <span class="brightness-value">Medium</span></p>
+          </div>
+        </div>
+
+        <div class="circuit parallel-circuit">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="parallel-branch">
+              <div class="inductor" data-value="100">
+                <div class="coil">
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                </div>
+              </div>
+              <div class="wire"></div>
+              <div class="inductor" data-value="200">
+                <div class="coil">
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                  <div class="coil-turn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>L1:</label>
+              <input type="range" class="inductor-value" data-inductor="1" min="1" max="1000" value="100">
+              <span class="value-display">100 mH</span>
+            </div>
+            <div class="control-group">
+              <label>L2:</label>
+              <input type="range" class="inductor-value" data-inductor="2" min="1" max="1000" value="200">
+              <span class="value-display">200 mH</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Inductance: <span class="total-inductance">66.67 mH</span></p>
+            <p>Current Rise Time: <span class="rise-time">0.07s</span></p>
+            <p>LED Brightness: <span class="brightness-value">High</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning">
+      <h2>Learn More</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3>Magnetic Fields</h3>
+          <p>When current flows through an inductor, it creates a magnetic field. The stronger the current, the stronger the field!</p>
+        </div>
+        <div class="card">
+          <h3>Series vs Parallel</h3>
+          <p>In series: L<sub>total</sub> = L<sub>1</sub> + L<sub>2</sub></p>
+          <p>In parallel: 1/L<sub>total</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub></p>
+        </div>
+        <div class="card">
+          <h3>Fun Fact</h3>
+          <p>Did you know? The first inductors were called "chokes" because they "choke" or limit alternating current!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html> 

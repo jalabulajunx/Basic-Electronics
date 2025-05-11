@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitors - Electricity Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>⚡ Capacitors</h1>
+    <nav>
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>What are Capacitors?</h2>
+      <p>Capacitors are components that store electrical energy, like tiny batteries! They can charge up and release their energy when needed. Think of them like water tanks that can fill up and empty out.</p>
+    </section>
+
+    <section class="charging-demo">
+      <h2>See Capacitors in Action!</h2>
+      <div class="circuit-demo">
+        <div class="circuit-diagram">
+          <div class="battery">
+            <div class="battery-body">
+              <div class="battery-terminal">+</div>
+              <div class="battery-cell"></div>
+              <div class="battery-cell"></div>
+              <div class="battery-terminal">-</div>
+            </div>
+            <div class="voltage-label">9V</div>
+          </div>
+          <div class="wire"></div>
+          <div class="switch">
+            <div class="switch-body">
+              <div class="switch-lever"></div>
+            </div>
+          </div>
+          <div class="wire"></div>
+          <div class="capacitor">
+            <div class="capacitor-plates">
+              <div class="plate positive"></div>
+              <div class="dielectric"></div>
+              <div class="plate negative"></div>
+            </div>
+            <div class="charge-indicator"></div>
+          </div>
+          <div class="wire"></div>
+          <div class="led">💡</div>
+        </div>
+        <div class="demo-controls">
+          <div class="control-group">
+            <label for="capacitance">Capacitance:</label>
+            <input type="range" id="capacitance" min="1" max="1000" value="100">
+            <span class="value-display">100 µF</span>
+          </div>
+          <div class="circuit-info">
+            <p>Charge: <span id="charge-level">0%</span></p>
+            <p>Voltage: <span id="capacitor-voltage">0V</span></p>
+            <p>LED Brightness: <span id="led-brightness">Off</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="capacitor-code">
+      <h2>Capacitor Value Code</h2>
+      <div class="code-explanation">
+        <div class="capacitor-example">
+          <h3>Reading Capacitor Values</h3>
+          <div class="capacitor">
+            <div class="capacitor-body">
+              <div class="value-marking">104</div>
+              <div class="voltage-marking">16V</div>
+            </div>
+          </div>
+          <p class="capacitor-calculation">10 × 10⁴ = 100,000 pF = 0.1 µF</p>
+        </div>
+        <div class="code-table">
+          <h3>Common Capacitor Markings</h3>
+          <table>
+            <tr>
+              <th>Marking</th>
+              <th>Value</th>
+              <th>Unit</th>
+            </tr>
+            <tr><td>101</td><td>100</td><td>pF</td></tr>
+            <tr><td>102</td><td>1,000</td><td>pF</td></tr>
+            <tr><td>103</td><td>10,000</td><td>pF</td></tr>
+            <tr><td>104</td><td>100,000</td><td>pF</td></tr>
+            <tr><td>105</td><td>1,000,000</td><td>pF</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="unit-explanation">
+        <h3>Understanding Capacitor Units</h3>
+        <div class="unit-cards">
+          <div class="unit-card">
+            <h4>Farad (F)</h4>
+            <p>The basic unit of capacitance. It's like measuring how much water a tank can hold!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">💧</span>
+                <p>1 Farad = A really big capacitor (like a swimming pool!)</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Microfarad (µF)</h4>
+            <p>One millionth of a Farad. Much more common in everyday electronics!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">🚰</span>
+                <p>1 µF = A small water bottle</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">💡</span>
+                <p>Common in LED lights and small toys</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Nanofarad (nF)</h4>
+            <p>One billionth of a Farad. Used in smaller circuits!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">🥤</span>
+                <p>1 nF = A few drops of water</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">🎮</span>
+                <p>Found in game controllers and remote controls</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-card">
+            <h4>Picofarad (pF)</h4>
+            <p>One trillionth of a Farad. The smallest common unit!</p>
+            <div class="unit-comparison">
+              <div class="comparison-item">
+                <span class="icon">💧</span>
+                <p>1 pF = A tiny drop of water</p>
+              </div>
+              <div class="comparison-item">
+                <span class="icon">📱</span>
+                <p>Used in phones and computers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-scale">
+          <h4>Size Comparison</h4>
+          <div class="scale-visual">
+            <div class="scale-item">
+              <div class="scale-bar" style="width: 100%"></div>
+              <span>1 Farad (F)</span>
+            </div>
+            <div class="scale-item">
+              <div class="scale-bar" style="width: 0.1%"></div>
+              <span>1 Microfarad (µF)</span>
+            </div>
+            <div class="scale-item">
+              <div class="scale-bar" style="width: 0.0001%"></div>
+              <span>1 Nanofarad (nF)</span>
+            </div>
+            <div class="scale-item">
+              <div class="scale-bar" style="width: 0.0000001%"></div>
+              <span>1 Picofarad (pF)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-container">
+      <div class="quiz-capacitor">
+        <h3>Capacitor Quiz</h3>
+        <div class="capacitor">
+          <div class="capacitor-body">
+            <div class="value-marking quiz-marking">
+              <!-- Value will be added by JavaScript -->
+            </div>
+            <div class="voltage-marking">16V</div>
+          </div>
+        </div>
+      </div>
+      <div class="quiz-controls">
+        <div class="quiz-input">
+          <label for="capacitance-guess">What is the capacitance value in microfarads (µF)?</label>
+          <input type="number" id="capacitance-guess" placeholder="Enter capacitance value">
+          <button id="check-answer">Check Answer</button>
+        </div>
+        <div id="quiz-feedback" class="quiz-feedback"></div>
+      </div>
+    </section>
+
+    <section class="circuit-types">
+      <h2>Series and Parallel Capacitors</h2>
+      <div class="circuit-tabs">
+        <button class="circuit-tab active" data-circuit="series">Series Circuit</button>
+        <button class="circuit-tab" data-circuit="parallel">Parallel Circuit</button>
+      </div>
+      
+      <div class="circuit-container">
+        <div class="circuit series-circuit active">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="capacitor-group">
+              <div class="capacitor" data-value="100">
+                <div class="capacitor-plates">
+                  <div class="plate positive"></div>
+                  <div class="dielectric"></div>
+                  <div class="plate negative"></div>
+                </div>
+              </div>
+              <div class="wire"></div>
+              <div class="capacitor" data-value="200">
+                <div class="capacitor-plates">
+                  <div class="plate positive"></div>
+                  <div class="dielectric"></div>
+                  <div class="plate negative"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>C1:</label>
+              <input type="range" class="capacitor-value" data-capacitor="1" min="1" max="1000" value="100">
+              <span class="value-display">100 µF</span>
+            </div>
+            <div class="control-group">
+              <label>C2:</label>
+              <input type="range" class="capacitor-value" data-capacitor="2" min="1" max="1000" value="200">
+              <span class="value-display">200 µF</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Capacitance: <span class="total-capacitance">66.67 µF</span></p>
+            <p>Charge Time: <span class="charge-time">0.67s</span></p>
+            <p>LED Brightness: <span class="brightness-value">Medium</span></p>
+          </div>
+        </div>
+
+        <div class="circuit parallel-circuit">
+          <div class="circuit-diagram">
+            <div class="battery">🔋</div>
+            <div class="wire"></div>
+            <div class="switch">
+              <div class="switch-body">
+                <div class="switch-lever"></div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="parallel-branch">
+              <div class="capacitor" data-value="100">
+                <div class="capacitor-plates">
+                  <div class="plate positive"></div>
+                  <div class="dielectric"></div>
+                  <div class="plate negative"></div>
+                </div>
+              </div>
+              <div class="wire"></div>
+              <div class="capacitor" data-value="200">
+                <div class="capacitor-plates">
+                  <div class="plate positive"></div>
+                  <div class="dielectric"></div>
+                  <div class="plate negative"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wire"></div>
+            <div class="led">💡</div>
+          </div>
+          <div class="circuit-controls">
+            <div class="control-group">
+              <label>C1:</label>
+              <input type="range" class="capacitor-value" data-capacitor="1" min="1" max="1000" value="100">
+              <span class="value-display">100 µF</span>
+            </div>
+            <div class="control-group">
+              <label>C2:</label>
+              <input type="range" class="capacitor-value" data-capacitor="2" min="1" max="1000" value="200">
+              <span class="value-display">200 µF</span>
+            </div>
+          </div>
+          <div class="circuit-info">
+            <p>Total Capacitance: <span class="total-capacitance">300 µF</span></p>
+            <p>Charge Time: <span class="charge-time">3s</span></p>
+            <p>LED Brightness: <span class="brightness-value">High</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning">
+      <h2>Learn More</h2>
+      <div class="info-cards">
+        <div class="card">
+          <h3>Charging and Discharging</h3>
+          <p>Capacitors store energy by building up charge on their plates. The time it takes to charge depends on the capacitance value!</p>
+        </div>
+        <div class="card">
+          <h3>Series vs Parallel</h3>
+          <p>In series: 1/C<sub>total</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub></p>
+          <p>In parallel: C<sub>total</sub> = C<sub>1</sub> + C<sub>2</sub></p>
+        </div>
+        <div class="card">
+          <h3>Fun Fact</h3>
+          <p>Did you know? The first capacitors were called "Leyden jars" and were used to store static electricity!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fluorescent-demo">
+      <h2>Fluorescent Tube Light Circuit</h2>
+      <div class="circuit-demo">
+        <div class="circuit-diagram fluorescent">
+          <div class="power-supply">
+            <div class="ac-source">AC</div>
+            <div class="voltage-label">230V</div>
+          </div>
+          <div class="wire"></div>
+          <div class="switch">
+            <div class="switch-body">
+              <div class="switch-lever"></div>
+            </div>
+          </div>
+          <div class="wire"></div>
+          <div class="choke">
+            <div class="choke-body">
+              <div class="coil"></div>
+              <div class="coil"></div>
+              <div class="coil"></div>
+            </div>
+            <div class="component-label">Choke</div>
+          </div>
+          <div class="wire"></div>
+          <div class="starter">
+            <div class="starter-body">
+              <div class="starter-glow"></div>
+            </div>
+            <div class="component-label">Starter</div>
+          </div>
+          <div class="wire"></div>
+          <div class="tube">
+            <div class="filament left"></div>
+            <div class="gas-tube">
+              <div class="gas-glow"></div>
+            </div>
+            <div class="filament right"></div>
+            <div class="component-label">Fluorescent Tube</div>
+          </div>
+          <div class="wire"></div>
+          <div class="capacitor">
+            <div class="capacitor-plates">
+              <div class="plate"></div>
+              <div class="dielectric"></div>
+              <div class="plate"></div>
+            </div>
+            <div class="component-label">Power Factor<br>Correction</div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <button id="start-tube" class="control-button">Start Tube Light</button>
+          <div class="circuit-info">
+            <p>Status: <span id="tube-status">Off</span></p>
+            <p>Current: <span id="tube-current">0A</span></p>
+            <p>Power Factor: <span id="power-factor">0.5</span></p>
+          </div>
+        </div>
+        <div class="explanation">
+          <h3>How it Works:</h3>
+          <ol>
+            <li>The <strong>choke</strong> (inductor) provides high voltage to start the tube and limits current during operation</li>
+            <li>The <strong>starter</strong> contains a small gas discharge tube that helps initiate the main tube's glow</li>
+            <li>The <strong>capacitor</strong> improves power factor by compensating for the inductive load</li>
+            <li>When started, the gas inside the tube ionizes, creating a bright glow</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html> 
